@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/JFSDReactApp/static/css/main.fd40ce53.css",
+    "main.js": "/JFSDReactApp/static/js/main.11d9819d.js",
+    "static/js/453.4e0a1687.chunk.js": "/JFSDReactApp/static/js/453.4e0a1687.chunk.js",
+    "static/media/politician.png": "/JFSDReactApp/static/media/politician.b7976927125f3f6c0399.png",
+    "static/media/flag.png": "/JFSDReactApp/static/media/flag.5d6f5eb01133b4f6f2f6.png",
+    "static/media/citizen.png": "/JFSDReactApp/static/media/citizen.4ca4c38991918ddabd80.png",
+    "static/media/citizens.png": "/JFSDReactApp/static/media/citizens.68d2b515cb2d77a5dcbb.png",
+    "static/media/jana.png": "/JFSDReactApp/static/media/jana.3e93cf4ce68c167a6dc9.png",
+    "static/media/leader.png": "/JFSDReactApp/static/media/leader.5f0234f2906e855b4b11.png",
+    "index.html": "/JFSDReactApp/index.html",
+    "main.fd40ce53.css.map": "/JFSDReactApp/static/css/main.fd40ce53.css.map",
+    "main.11d9819d.js.map": "/JFSDReactApp/static/js/main.11d9819d.js.map",
+    "453.4e0a1687.chunk.js.map": "/JFSDReactApp/static/js/453.4e0a1687.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fd40ce53.css",
+    "static/js/main.11d9819d.js"
+  ]
+}
