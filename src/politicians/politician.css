@@ -1,8 +1,4 @@
-/* General body styles */
-body {
-    /* background-image: url('../images/flag.png'); */
 
-  }
   
   .login-container{
     display:flex;
@@ -43,7 +39,7 @@ body {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border-radius: 5px;
+    border-radius: 30px;
     border: 1px solid #ccc;
     font-size: 16px;
     color: #333;
@@ -64,41 +60,28 @@ body {
     text-decoration: underline;
   }
   
-  .login-form .button-class
-  {
-    display: flex;
-    flex-direction: row;
-  }
+  
   /* Styling for the login and clear buttons */
-  .login-form .login-button, .clear-button {
-    width: 100px;
-    margin-bottom: 10px;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    
-  }
+  
   
   .login-form .login-button {
-    background-color: #4CAF50;
+    background-color: #4CC9FE;
     color: white;
     padding: 10px;
+
   }
   
   .login-form .login-button:hover {
-    background-color: #45a049;
+    background-color: #457da0;
   }
   
   .clear-button {
-    background-color: #f44336;
+    background-color: #E4003A;
     color: white;
   }
   
   .clear-button:hover {
-    background-color: #e53935;
+    background-color: #e19896;
   }
   
   /* Image styling */

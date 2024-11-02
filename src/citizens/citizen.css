@@ -77,8 +77,8 @@ form label {
 }
 
 /* Button styling */
-form input[type="submit"] {
-    background-color: rgba(17, 17, 226, 0.562);
+form input[type="submit"] input[type="reset"]{
+    background-color: rgba(226, 202, 17, 0.562);
     color: #ffffff;
     font-size: 17px;
     border: none;
@@ -111,3 +111,5 @@ form span a {
     justify-content: space-between;
     padding-top: 10px;
 }
+
+
