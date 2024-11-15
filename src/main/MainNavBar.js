@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
 import logo from '../images/jana.png'
 import Home from './Home';
@@ -8,20 +8,25 @@ import PoliticianLogin from '../politicians/PoliticianLogin';
 import CitizenLogin from '../citizens/CitizenLogin';
 import ContactUs from './ContactUs';
 import DashBoard from '../citizendashboard/DashBoard';
-import Feed from '../pages/Feed';
-import Reports from '../pages/Reports';
-import FeedBack from '../pages/FeedBack';
+
 import PoliticianDashboard from '../politiciandashboard/PoliticianDashboard';
 import PoliticianFeed from '../pages/PoliticianFeed';
 import PoliticianReports from '../pages/PoliticianReports';
 import MyRating from './../pages/MyRating';
 import MyPosts from './../pages/MyPosts';
 import AdminDashboard from '../admindashboard/AdminDashboard';
-import AdminFeed from '../pages/AdminFeed';
-import AdminManage from '../pages/AdminManage';
 import AdminLogin from '../admin/AdminLogin';
+import NotFound from '../pages/NotFound';
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
 
-export default function MainNavBar() {
+Chart.register(CategoryScale);
+export default function MainNavBar({ onAdminLogin,onCitizenLogin,onPoliticianLogin}) 
+{
+  const [chartData, setChartData] = useState({
+    // ...chart data
+  });
+
   return (
     <div className='app-container'>
     <nav className='navbar'>
@@ -30,7 +35,7 @@ export default function MainNavBar() {
         <h3>Jana SevaAP</h3>
       </div>
       <ul className="nav-links">
-        <li><Link to="/JFSDReactApp">HOME</Link></li>
+        <li><Link to="/">HOME</Link></li>
         <li><Link to="/citizen">CITIZENS</Link></li>
         <li><Link to="/politician">POLITICIANS</Link></li>
         <li><Link to="/register">REGISTRATION</Link></li>
@@ -38,24 +43,18 @@ export default function MainNavBar() {
       </ul>
     </nav>
     <Routes>
-    <Route path='/JFSDReactApp' element={<Home/>} exact />
-        <Route path='/citizen' element={<CitizenLogin/>}  exact/>
-        <Route path='/politician' element={<PoliticianLogin/>} exact/>
+    <Route path='/' element={<Home/>} exact />
+        <Route path='/citizen' element={<CitizenLogin onCitizenLogin={onCitizenLogin}/>}  exact/>
+        <Route path='/politician' element={<PoliticianLogin onPoliticianLogin={onPoliticianLogin}/>} exact/>
         <Route path='/register' element={<CitizenRegistration/>} exact/>
         <Route path='/contactus' element={<ContactUs/>} exact/>
-        <Route path='/citizendashboard' element={<DashBoard/>}/>
-     <Route path='/citizendashboard/feed' element={<Feed/>}/>
-      <Route path='/citizendashboard/reports' element={<Reports/>}/>
-      <Route path='/citizendashboard/feedback' element={<FeedBack/>}/>
-      <Route path='/politiciandashboard' element={<PoliticianDashboard/>}/>
-      <Route path='/politiciandashboard/feed' element={<PoliticianFeed/>}/>
-      <Route path='/politiciandashboard/rating' element={<MyRating/>}/>
-      <Route path='/politiciandashboard/reports' element={<PoliticianReports/>}/>
-      <Route path='/politiciandashboard/posts' element={<MyPosts/>}/>
-      <Route path='/adminlogin' element={<AdminLogin/>}/>
-<Route path='/admindashboard' element={<AdminDashboard/>}/>
-<Route path='/admindashboard/feed' element={<AdminFeed/>}/>
-<Route path='/admindashboard/manage' element={<AdminManage/>}/>
+        <Route path='/citizendashboard/*' element={<DashBoard chartData={chartData}/>} exact/>
+      <Route path='/politiciandashboard/*' element={<PoliticianDashboard/>} exact/>
+      
+      <Route path='/adminlogin' element={<AdminLogin onAdminLogin={onAdminLogin}/>} exact/>
+<Route path='/admindashboard/*/*' element={<AdminDashboard/>} exact/>
+
+<Route path='*' element={<NotFound/>} exact/>
   
         
     </Routes>

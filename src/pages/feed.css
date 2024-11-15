@@ -1,0 +1,146 @@
+.feed {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+	padding: 2rem;
+}
+
+.issue-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.cta {
+	display: flex;
+	background-color: #a4e6c0;
+	max-width: 60rem;
+	width: 100%;
+	border-radius: 1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	border: 1px solid #98d9b3;
+	padding: 1rem;
+	gap: 1rem;
+	transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.cta:hover {
+	transform: scale(1.02);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.cta img {
+	width: 200px;
+	height: auto;
+	border-radius: 0.5rem;
+	object-fit: cover;
+}
+
+.cta__text-column {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	color: #333;
+}
+
+.cta__text-column h2 {
+	margin: 0;
+	font-size: 1.5rem;
+	color: #333;
+	font-weight: bold;
+}
+
+.cta__text-column p {
+	margin: 0.5rem 0;
+	font-size: 1rem;
+	line-height: 1.4;
+	color: #555;
+}
+
+.cta__buttons {
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.cta button {
+	color: white;
+	padding: 0.6rem 1.5rem;
+	text-decoration: none;
+	background: #42a5f5;
+	border-radius: 0.5rem;
+	font-weight: bold;
+	text-align: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+	transition: background 0.3s ease;
+}
+
+.cta button:hover {
+	background: #1e88e5;
+}
+
+.cta a:first-of-type {
+	background: #4caf50;
+}
+
+.cta a:first-of-type:hover {
+	background: #388e3c;
+}
+
+
+/* Container styling */
+.admin-manage-container {
+	text-align: center;
+	/* background-color: #c8facc; Light green background */
+	padding: 40px;
+  }
+  
+  /* Title styling */
+  .admin-manage-container h2 {
+	font-size: 1.5em;
+	color: #333;
+	margin-bottom: 10px;
+  }
+  
+  /* Flex container for options */
+  .admin-options {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+  }
+  
+  /* Individual option styling */
+  .admin-option {
+	width: 120px;
+	height: 120px;
+	background-color: #e1ffe6; /* Slightly lighter green for boxes */
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease;
+	cursor: pointer;
+  }
+  
+  /* Icon styling */
+  .icon {
+	font-size: 2em;
+	color: #333;
+	margin-bottom: 8px;
+  }
+  
+  /* Text styling */
+  .admin-option p {
+	font-size: 1em;
+	color: #333;
+	margin: 0;
+  }
+  
+  /* Hover effect */
+  .admin-option:hover {
+	transform: scale(1.05);
+  }
+  

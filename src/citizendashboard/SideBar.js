@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 import './SideBar.css'
+import mylogo from '../images/jana.png'
 import { SideBarData } from './SideBarData';
 import { IconContext } from 'react-icons/lib';
 function SideBar() {
@@ -27,7 +28,9 @@ function SideBar() {
             <Link to="#" className='menu-bars'>
             <FaBars onClick={showSidebar}/> 
            </Link>
-           <button onClick={logout} className='logout' >Logout</button>
+           <img src={mylogo} alt="Logo" className="citizen-logo" />
+           <h3>Citizen Dashboard</h3>
+           <button onClick={logout} className='logout1'  >Logout</button>
         </div>
         
         <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
@@ -53,4 +56,4 @@ function SideBar() {
   )
 }
 
-export default SideBar
+export default SideBar;

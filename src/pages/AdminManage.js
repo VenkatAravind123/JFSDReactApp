@@ -1,57 +1,51 @@
-import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { FaBars } from "react-icons/fa6";
-import { IconContext } from "react-icons/lib";
-import { Link, useNavigate } from "react-router-dom";
-import { AdminSideBarData } from './../admindashboard/AdminSideBarData';
+import React from 'react';
+import './feed.css'; // Make sure to create this CSS file
+import { BsPeopleFill } from "react-icons/bs";
+// Import icons (or replace with your actual image paths)
+import { FaUserFriends, FaUserTie, FaCrown } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { FaPeopleGroup } from 'react-icons/fa6';
 
-function AdminManage() {
-    const [sidebar,setSidebar] = useState(false);
-  
-      const showSidebar = ()=>{
-          setSidebar(!sidebar)
-      }
-  
-      const navigate = useNavigate();
-  
-      const logout = ()=>{
-        //   localStorage.removeItem('isCitizenLoggedIn');
-        //   localStorage.removeItem('citizen');
-  
-          navigate('/citizen');
-          window.location.reload();
-      }
-    return (
-      
-      <IconContext.Provider value={{color:"#fff"}}>
-          <div className='navbar1'>
-              <Link to="#" className='menu-bars'>
-              <FaBars onClick={showSidebar}/>
-              <button onClick={logout} className='logout' >Logout</button> 
-             </Link>
-          </div>
-          <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
-              <ul className='nav-menu-items' onClick={showSidebar}>
-                  <li className='navbar-toggle'>
-                      <Link to="#" className='menu-bars'>
-                      <AiOutlineClose /></Link>
-                  </li>
-                  {AdminSideBarData.map((item,index)=>{
-                      return (
-                          <li key={index} className={item.cName}>
-                              <Link to={item.path}>
-                              {item.icon}
-                              <span>{item.title}</span>
-                              </Link>
-                          </li>
-                      )
-                  })}
-              </ul>
-          </nav>
-          <h1>Admin Manage Page</h1>
-          </IconContext.Provider>
-  
-    )
-  }
-  
-  export default AdminManage
+
+export default function AdminManage() 
+{
+    const navigate = useNavigate()
+    const addcitizen = ()=>{
+        navigate("/admindashboard/addcitizen")
+    }
+
+
+    const addpolitician = ()=>{
+        navigate("/admindashboard/addpolitician")
+    }
+    const viewallcitizens = ()=>{
+        navigate("/admindashboard/viewallcitizens")
+    }
+    const viewallpoliticians = ()=>{
+        navigate("/admindashboard/viewallpoliticians")
+    }
+  return (
+    <div className="admin-manage-container">
+      <h2>Admin Manage</h2>
+      <div className="admin-options">
+        <div className="admin-option" onClick={addcitizen}>
+          <FaUserFriends className="icon" />
+          <p>Add Citizen</p>
+        </div>
+        <div className="admin-option" onClick={addpolitician}>
+          <FaUserTie className="icon" />
+          <p>Add Politician</p>
+        </div>
+        <div className="admin-option">
+          <FaPeopleGroup className="icon" onClick={viewallcitizens}/>
+          <p>View All Citizens</p>
+        </div>
+        <div className="admin-option">
+          
+          <BsPeopleFill className="icon" onClick={viewallpoliticians}/>
+          <p>View All Politicians</p>
+        </div>
+      </div>
+    </div>
+  );
+}

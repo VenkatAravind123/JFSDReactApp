@@ -1,56 +1,80 @@
-import React, { useState } from 'react'
-import { FaBars } from "react-icons/fa6";
-import { AiOutlineClose } from "react-icons/ai";
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
 import '../citizendashboard/SideBar.css'
-import { SideBarData } from '../citizendashboard/SideBarData';
-import { IconContext } from 'react-icons/lib';
+import axios from 'axios';
+
 function Reports() {
-  const [sidebar,setSidebar] = useState(false);
+  const [formData, setFormData] = useState({
+    description: '',
+    image_url: '',
+  });
+const [citizendata,setCitizenData] = useState("")
+  const [message, setMessage] = useState("");
 
-  const showSidebar = ()=>{
-      setSidebar(!sidebar)
-  }
-  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const logout = ()=>{
-        localStorage.removeItem('isCitizenLoggedIn');
-        localStorage.removeItem('citizen');
-
-        navigate('/citizen');
-        window.location.reload();
+  useEffect(() => {
+    const storedCitizenData = localStorage.getItem('citizen');
+    
+    if (storedCitizenData) {
+      const parsedCitizenData = JSON.parse(storedCitizenData);
+      setCitizenData(parsedCitizenData);
     }
-return (
-  
-  <IconContext.Provider value={{color:"#fff"}}>
-      <div className='navbar1'>
-          <Link to="#" className='menu-bars'>
-          <FaBars onClick={showSidebar}/> 
-          <button onClick={logout} className='logout' >Logout</button>
-         </Link>
-      </div>
-      <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
-              <li className='navbar-toggle'>
-                  <Link to="#" className='menu-bars'>
-                  <AiOutlineClose /></Link>
-              </li>
-              {SideBarData.map((item,index)=>{
-                  return (
-                      <li key={index} className={item.cName}>
-                          <Link to={item.path}>
-                          {item.icon}
-                          <span>{item.title}</span>
-                          </Link>
-                      </li>
-                  )
-              })}
-          </ul>
-      </nav>
-      <h1>Reports</h1>
-      </IconContext.Provider>
+  }, []);
 
-)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const citizenId = citizendata.id;
+      const response = await axios.post(`http://localhost:2021/citizen/${citizenId}/issues`, formData);
+      console.log(response.data)
+      if (response.status === 200) {
+        setMessage(response.data.message || 'Issue Created successful!');
+        setFormData({
+            description: '',
+            image_url: '',
+            
+        });
+      }
+    } catch (error) {
+      console.error(error.message);
+      setMessage('Issue Creation failed. Please try again.');
+    }
+  };
+
+  return (
+    <div className="add-citizen-container">
+      <h2>Add Issue</h2>
+      <form className="add-citizen-form" onSubmit={handleSubmit}>
+        {message && <p className="success-message">{message}</p>}
+        
+        <label>Description</label>
+        <input 
+          type="text" 
+          name="description" 
+          value={formData.description} 
+          onChange={handleChange} 
+          required 
+          placeholder="Enter Issue Description" 
+        />
+
+
+        <label>Image URL</label>
+        <input 
+          type="text" 
+          name="image_url" 
+          value={formData.image_url} 
+          onChange={handleChange} 
+          required 
+          placeholder="Enter Image Link" 
+        />
+       
+
+        <button type="submit" className="submit-button">Add Citizen</button>
+      </form>
+    </div>
+  );
 }
 
-export default Reports
+export default Reports;

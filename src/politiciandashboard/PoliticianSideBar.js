@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from 'react-icons/lib';
 import { SideBarData } from './SideBarData';
+import mylogo from '../images/jana.png'
 import './PoliticianSideBar.css'
 
 export default function PoliticianSideBar() {
@@ -14,9 +15,9 @@ export default function PoliticianSideBar() {
     }
     const navigate = useNavigate();
 
-    const logou1t = ()=>{
-        // localStorage.removeItem('isCitizenLoggedIn');
-        // localStorage.removeItem('citizen');
+    const logout = ()=>{
+        localStorage.removeItem('isPoliticianLoggedIn');
+        localStorage.removeItem('politician');
 
         navigate('/politician');
         window.location.reload();
@@ -29,8 +30,9 @@ export default function PoliticianSideBar() {
             <Link to="#" className='menu-bars1'>
             <FaBars onClick={showSidebar}/> 
            </Link>
+           <img src={mylogo} alt="Logo" className="politician-logo" />
            <h3>Politician Dashboard</h3>
-           <button onClick={logou1t} className='logout1' >Logout</button>
+           <button onClick={logout} className='logout13' >Logout</button>
         </div>
         
         <nav className={sidebar ? 'nav-menu active':'nav-menu'}>

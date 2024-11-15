@@ -3,8 +3,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa6';
 import { IconContext } from 'react-icons/lib';
 import { Link, useNavigate } from 'react-router-dom';
-
-import './AdminDashboard.css'
+import logo from '../images/jana.png'
+import './AdminSideBar.css'
 import { AdminSideBarData } from './../admindashboard/AdminSideBarData';
 
 function AdminSideBar() {
@@ -16,8 +16,8 @@ function AdminSideBar() {
     const navigate = useNavigate();
 
     const logout = ()=>{
-        // localStorage.removeItem('isCitizenLoggedIn');
-        // localStorage.removeItem('citizen');
+        localStorage.removeItem('isAdminLoggedIn');
+        localStorage.removeItem('admin');
 
         navigate('/citizen');
         window.location.reload();
@@ -29,7 +29,9 @@ function AdminSideBar() {
             <Link to="#" className='menu-bars'>
             <FaBars onClick={showSidebar}/> 
            </Link>
-           <button onClick={logout} className='logout' >Logout</button>
+           <img src={logo} alt='Logo' style={{maxWidth:"60px",maxHeight:"fit-content",borderRadius:"10px"}}/>
+           <h3>Admin Dashboard</h3>
+           <button onClick={logout} className='logout2' >Logout</button>
         </div>
         
         <nav className={sidebar ? 'nav-menu active':'nav-menu'}>

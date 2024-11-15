@@ -11,7 +11,10 @@
     font-size: 2rem;
     background: none;
 }
-
+.logo1{
+    max-width: 10px;
+    max-height: fit-content;
+}
 .nav-menu{
     background-color: #34c3f3;
     width: 250px;
@@ -73,12 +76,17 @@ span{
     margin-left: 16px;
 }
 
-.logout{
+.logout2{
     color: white;
     background-color: #53cbef;
     padding: 10px;
     border-radius: 10px;
     border: 0;
-    transform: translateX(1350px);
+    transform: translateX(1150px);
     cursor: pointer;
+}
+
+.logout2:hover{
+    background-color: #1a83ff;
+    transition: 0.13s;
 }

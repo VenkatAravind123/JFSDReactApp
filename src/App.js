@@ -1,42 +1,62 @@
-import React, { useState } from 'react';  
+import React, { useEffect, useState } from 'react';  
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';  
 import MainNavBar from './main/MainNavBar';  
 import DashBoard from './citizendashboard/DashBoard';  
 import PoliticianDashboard from './politiciandashboard/PoliticianDashboard';  
 import CitizenLogin from './citizens/CitizenLogin';
+import AdminDashboard from './admindashboard/AdminDashboard';
 
 
-function App() {  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  
-  const [isPoliticianLoggedIn, setIsPoliticianLoggedIn] = useState(false);  
+function App() { 
+  //total 3 modules 1)Admin 2)Citizen 3)Politician
+  const [isAdminLoggedIn,setIsAdminLoggedIn] = useState(false)
+  const [isCitizenLoggedIn,setIsCitizenLoggedIn] = useState(false)
+  const [isPoliticianLoggedIn,setIsPoliticianLoggedIn] = useState(false)
+  
+  useEffect(() => {
+    const adminLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
+    const citizenLoggedIn = localStorage.getItem('isCitizenLoggedIn') === 'true';
+    const politicianLoggedIn = localStorage.getItem('isPoliticianLoggedIn') === 'true';
+   
+    setIsAdminLoggedIn(adminLoggedIn);
+    setIsCitizenLoggedIn(citizenLoggedIn);
+    setIsPoliticianLoggedIn(politicianLoggedIn);
+  }, [])
+  
+ 
+  const onAdminLogin = ()=>{
+    localStorage.setItem('isAdminLoggedIn','true')
+    setIsAdminLoggedIn(true)
+  }
 
-  const handleCitizenLogin = () => {  
-    // Simulating login  
-    setIsLoggedIn(true);  
-  };  
+  const onCitizenLogin = ()=>{
+    localStorage.setItem('isCitizenLoggedIn','true')
+    setIsCitizenLoggedIn(true)
+  }
 
-  const handleCitizenLogout = () => {  
-    setIsLoggedIn(false);  
-  };  
-
-  const handlePoliticianLogin = () => {  
-    // Simulating politician login  
-    setIsPoliticianLoggedIn(true);  
-  };  
-
-  const handlePoliticianLogout = () => {  
-    setIsPoliticianLoggedIn(false);  
-  };  
-
+  const onPoliticianLogin = ()=>{
+    localStorage.setItem('isPoliticianLoggedIn','true')
+    setIsPoliticianLoggedIn(true)
+  }
   return (  
     <div className="App">  
       <Router>  
-        <MainNavBar />  
-        {/* <Routes>  
-          <Route path="/" element={isLoggedIn ? <Navigate to="/citizendashboard" /> : <CitizenLogin onLogin={handleCitizenLogin} />} />  
-          <Route path="/citizendashboard" element={isLoggedIn ? <DashBoard onLogout={handleCitizenLogout} /> : <Navigate to="/" />} />  
-          <Route path="/politiciandashboard" element={isPoliticianLoggedIn ? <PoliticianDashboard onLogout={handlePoliticianLogout} /> : <Navigate to="/" />} />  
-        </Routes>   */}
+        {
+          isAdminLoggedIn ? (
+            <AdminDashboard/>
+          ) : isCitizenLoggedIn ? (
+            <DashBoard/>
+          ) : isPoliticianLoggedIn ? (
+            <PoliticianDashboard/>
+          ) : (
+            <MainNavBar 
+            onAdminLogin = {onAdminLogin}
+            onCitizenLogin = {onCitizenLogin}
+            onPoliticianLogin = {onPoliticianLogin}
+            />
+          )
+        }
+        
       </Router>  
     </div>  
   );  

@@ -23,34 +23,34 @@ function FeedBack() {
     }
   return (
     
-    <IconContext.Provider value={{color:"#fff"}}>
-        <div className='navbar1'>
-            <Link to="#" className='menu-bars'>
-            <FaBars onClick={showSidebar}/> 
-            <button onClick={logout} className='logout' >Logout</button> 
-           </Link>
-        </div>
-        <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
-            <ul className='nav-menu-items' onClick={showSidebar}>
-                <li className='navbar-toggle'>
-                    <Link to="#" className='menu-bars'>
-                    <AiOutlineClose /></Link>
-                </li>
-                {SideBarData.map((item,index)=>{
-                    return (
-                        <li key={index} className={item.cName}>
-                            <Link to={item.path}>
-                            {item.icon}
-                            <span>{item.title}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
-        </nav>
+    // <IconContext.Provider value={{color:"#fff"}}>
+    //     <div className='navbar1'>
+    //         <Link to="#" className='menu-bars'>
+    //         <FaBars onClick={showSidebar}/> 
+    //         <button onClick={logout} className='logout' >Logout</button> 
+    //        </Link>
+    //     </div>
+    //     <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
+    //         <ul className='nav-menu-items' onClick={showSidebar}>
+    //             <li className='navbar-toggle'>
+    //                 <Link to="#" className='menu-bars'>
+    //                 <AiOutlineClose /></Link>
+    //             </li>
+    //             {SideBarData.map((item,index)=>{
+    //                 return (
+    //                     <li key={index} className={item.cName}>
+    //                         <Link to={item.path}>
+    //                         {item.icon}
+    //                         <span>{item.title}</span>
+    //                         </Link>
+    //                     </li>
+    //                 )
+    //             })}
+    //         </ul>
+    //     </nav>
+        // </IconContext.Provider>
         <h1>FeedBack</h1>
-        </IconContext.Provider>
-
+        
   )
 }
 

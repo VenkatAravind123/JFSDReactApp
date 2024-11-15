@@ -1,7 +1,6 @@
 import { MdBugReport, MdFeed, MdOutlineFeedback } from "react-icons/md";
 import React from 'react'
-import { FaBars, FaSignsPost } from "react-icons/fa6";
-import { AiFillHome, AiOutlineClose } from "react-icons/ai";
+import { FaSignsPost } from "react-icons/fa6";
 
 export const SideBarData = [
     

@@ -73,12 +73,21 @@ span{
     margin-left: 16px;
 }
 
-.logout1{
+.logout13{
     color: white;
     background-color: #53cbef;
     padding: 10px;
     border-radius: 10px;
     border: 0;
-    transform: translateX(1350px);
+    transform: translateX(1110px);
     cursor: pointer;
+}
+.logout13:hover{
+    background-color: #1a83ff;
+}
+
+.politician-logo{
+    max-width:60px;
+    max-height:fit-content;
+    border-radius:10px;
 }

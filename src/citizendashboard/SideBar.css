@@ -73,12 +73,93 @@ span{
     margin-left: 16px;
 }
 
-.logout{
+.logout1{
     color: white;
     background-color: #53cbef;
     padding: 10px;
     border-radius: 10px;
     border: 0;
-    transform: translateX(1350px);
+    transform: translateX(1150px);
     cursor: pointer;
 }
+.logout1:hover{
+    background-color: #1a83ff;
+}
+
+.citizen-logo{
+    max-width:60px;
+    max-height:fit-content;
+    border-radius:10px;
+}
+
+/* .issue-container{
+    display: flex;
+    margin: 0 auto;
+    border: #1a83ff;
+}
+.image{
+    max-width: 500px;
+} */
+
+.issue1-container {
+    max-width: 3000px;
+    max-height: max-content;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .issue1-container img.image {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .issue1-container p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .issue1-container p b {
+    color: #555;
+  }
+  
+  .issue1-container p:first-of-type {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .issue1-container .status {
+    font-weight: bold;
+    color: #008000; /* Green for status */
+  }
+  
+  .issue1-container .posted-at {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .issue1-container .citizen-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #004080;
+  }
+  
+  .error-message {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    font-weight: bolder;
+  }
+  
+
+  

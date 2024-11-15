@@ -1,56 +1,99 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa6';
 import { IconContext } from 'react-icons/lib';
 import '../politiciandashboard/PoliticianSideBar.css'
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
 import { SideBarData } from '../politiciandashboard/SideBarData';
 
 export default function PoliticianFeed() {
-    const [sidebar,setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(false);
+  const [issues, setIssues] = useState([]);
+  const [error, setError] = useState('');
+  
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
-    const showSidebar = ()=>{
-        setSidebar(!sidebar)
+  const navigate = useNavigate();
+  
+  const logout = () => {
+    localStorage.removeItem('isPoliticianLoggedIn');
+    localStorage.removeItem('politician');
+    navigate('/politician');
+    window.location.reload();
+  };
+
+  const fetchIssues = async () => {
+    try {
+      const response = await axios.get('http://localhost:2021/politician/viewallissues');
+      setIssues(response.data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchIssues();
+  }, []);
+  const formatDate = (dateArray) => {  
+    // Create a new Date object from the array  
+    // In this array: [year, month, day, hour, minute, second, millisecond]  
+    const [year, month, day, hour, minute, second, millisecond] = dateArray;  
+  
+    // JavaScript Date months are 0-based (0 = January, 1 = February, etc.)  
+    // So we need to subtract 1 from the month value  
+    const date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000)); // convert nanoseconds to seconds  
+    
+    const options = {  
+      year: 'numeric',   
+      month: 'long',  
+      day: 'numeric',   
+      hour: '2-digit',   
+      minute: '2-digit',   
+      second: '2-digit',   
+      hour12: true  
+    };  
+  
+    return date.toLocaleString(undefined, options);  
+  }; 
+
+  const displayIssue = async (id) => 
+    {
+        try 
+        {
+          navigate(`/viewissue/${id}`)
+        } 
+        catch (error) 
+        {
+          console.error(error.message);
+        }
+    
     }
 
-    const navigate = useNavigate();
-
-    const logout = ()=>{
-        // localStorage.removeItem('isCitizenLoggedIn');
-        // localStorage.removeItem('citizen');
-
-        navigate('/politician');
-        window.location.reload();
-    }
   return (
     
-    <IconContext.Provider value={{color:"#fff"}}>
-        <div className='navbar1'>
-            <Link to="#" className='menu-bars'>
-            <FaBars onClick={showSidebar}/>
-            <button onClick={logout} className='logout' >Logout</button> 
-           </Link>
-        </div>
-        <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
-            <ul className='nav-menu-items' onClick={showSidebar}>
-                <li className='navbar-toggle'>
-                    <Link to="#" className='menu-bars'>
-                    <AiOutlineClose /></Link>
-                </li>
-                {SideBarData.map((item,index)=>{
-                    return (
-                        <li key={index} className={item.cName}>
-                            <Link to={item.path}>
-                            {item.icon}
-                            <span>{item.title}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
-        </nav>
-        <h1>Feed</h1>
-        </IconContext.Provider>
-
-  )
+      <div className='feed'>
+      {issues.length > 0 ? (
+        issues.map((issue, index) => (
+          <div key={index} className="issue-container">
+            <article className="cta">
+              <img src={issue.image_url} alt={`Image for ${issue.description}`} className="issue-image" />
+              <div className="cta__text-column">
+                <h2>{issue.description}</h2>
+                <button onClick={()=>displayIssue(issue.id)}>Read all about it</button>
+              </div>
+              <p>Posted At:{formatDate(issue.createdAt)}</p>
+              <p>Citizen Name: {issue.citizen.name}</p>
+            </article>
+          </div>
+        ))
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <p>No Issues Found</p>
+      )}
+      </div>
+  );
 }

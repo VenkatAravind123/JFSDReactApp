@@ -15,3 +15,47 @@ justify-content: center;
 font-size: 3rem;
 
 }
+
+.admin-content{
+  display: flex;
+  margin: 0 auto;
+}
+.card-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  padding: auto;
+}
+
+.card {
+  width: 150px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #000;
+}
+
+.card.citizen-count {
+  background-color: #6fe5c7; /* Use the green shade similar to the image */
+}
+
+.card.politician-count {
+  background-color: #83e5ff; /* Use the blue shade similar to the image */
+}
+
+.card h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 5px 0 0;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
