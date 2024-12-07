@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AdminSideBarData } from './../admindashboard/AdminSideBarData';
 import axios from "axios";
 import './feed.css';
+import config from './../main/config';
 
 function AdminFeed() {
   const [sidebar, setSidebar] = useState(false);
@@ -34,7 +35,7 @@ function AdminFeed() {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get(`http://localhost:2021/admin/viewissuebyconstituency/${selectedConstituency}`);
+        const response = await axios.get(`${config.url}/admin/viewissuebyconstituency/${selectedConstituency}`);
         setIssues(response.data);
       } catch (error) {
         setError(error.message);
@@ -47,7 +48,7 @@ function AdminFeed() {
       // Fetch all issues if no constituency is selected
       const fetchAllIssues = async () => {
         try {
-          const response = await axios.get('http://localhost:2021/admin/viewallissues');
+          const response = await axios.get(`${config.url}/admin/viewallissues`);
           setIssues(response.data);
         } catch (error) {
           setError(error.message);

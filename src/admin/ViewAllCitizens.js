@@ -14,7 +14,7 @@ export default function ViewAllCitizens() {
 
   const fetchCitizens = async () => {
     try {
-      const response = await axios.get('http://localhost:2021/admin/viewcitizens');
+      const response = await axios.get(`${config.url}/admin/viewcitizens`);
       setCitizens(response.data);
       setLoading(false);
     } catch (error) {

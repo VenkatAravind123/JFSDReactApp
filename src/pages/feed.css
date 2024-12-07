@@ -101,7 +101,9 @@
 	gap: 30px;
 	padding: 20px;
   }
-  
+  .feed p{
+	color: #333;
+  }
   .issue-container {
 	background: white;
 	border-radius: 15px;
