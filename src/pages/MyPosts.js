@@ -14,16 +14,14 @@ export default function MyPosts() {
 
     const navigate = useNavigate();
 
-    const logout = ()=>{
-        // localStorage.removeItem('isCitizenLoggedIn');
-        // localStorage.removeItem('citizen');
+    // const logout = ()=>{
+    //     // localStorage.removeItem('isCitizenLoggedIn');
+    //     // localStorage.removeItem('citizen');
 
-        navigate('/politician');
-        window.location.reload();
-    }
+    //     navigate('/politician');
+    //     window.location.reload();
+    // }
   return (
-    
-    
         <h1>MyPosts</h1>
 
   )

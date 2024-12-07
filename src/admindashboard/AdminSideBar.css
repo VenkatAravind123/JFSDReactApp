@@ -1,4 +1,4 @@
-.navbar1{
+.navbar3{
     background-color: #289cf4;
     height: 80px;
     display: flex;
@@ -76,17 +76,26 @@ span{
     margin-left: 16px;
 }
 
-.logout2{
+.logout2 {
+    margin-left: auto;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #00c3ea, #0097b2);
     color: white;
-    background-color: #53cbef;
-    padding: 10px;
-    border-radius: 10px;
-    border: 0;
-    transform: translateX(1150px);
+    font-weight: 500;
     cursor: pointer;
-}
-
-.logout2:hover{
-    background-color: #1a83ff;
-    transition: 0.13s;
-}
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logout2:hover {
+    background: linear-gradient(45deg, #0097b2, #006d80);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .logout2:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }

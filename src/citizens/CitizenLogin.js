@@ -3,6 +3,7 @@ import citizen from '../images/citizen.png';  // Make sure this is the correct p
 import './citizen.css';  
 import { Link, useNavigate } from 'react-router-dom';  
 import axios from 'axios';
+import config from '../main/config';
 
 export default function CitizenLogin({onCitizenLogin})
 {  
@@ -26,7 +27,7 @@ export default function CitizenLogin({onCitizenLogin})
     const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post(`http://localhost:2021/citizen/checkcitizenlogin?email=${formdata.email}&pwd=${formdata.password}`);
+    const response = await axios.post(`${config.url}/citizen/checkcitizenlogin?email=${formdata.email}&pwd=${formdata.password}`);
     // console.log("Response:", response);  // Check the full response object
 
     if (response.data) {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './admin.css'
 import axios from 'axios';
+import config from '../main/config';
 
 export default function AddPolitician() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ export default function AddPolitician() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:2021/admin/addpolitician', formData);
+      const response = await axios.post(`${config.url}/admin/addpolitician`, formData);
       if (response.status === 200) {
         setMessage(response.data.message || 'Registration successful!');
         setFormData({
@@ -150,7 +151,7 @@ export default function AddPolitician() {
           placeholder="Enter Password" 
         ></input>
 
-        <button type="submit" className="submit-button">Add Citizen</button>
+        <button type="submit" className="submit-button">Add Politician</button>
       </form>
     </div>
   );

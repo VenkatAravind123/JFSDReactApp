@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEye } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import config from '../main/config';
 
 export default function ViewAllPoliticians() {
   const [politicians, setPoliticians] = useState([]);
@@ -28,7 +29,7 @@ export default function ViewAllPoliticians() {
     {
             try 
             {
-                await axios.delete(`http://localhost:2021/admin/deletepolitician?id=${id}`);
+                await axios.delete(`${config.url}/admin/deletepolitician?id=${id}`);
                 fetchPoliticians();
             } 
             catch (error) 
@@ -62,7 +63,7 @@ export default function ViewAllPoliticians() {
   return (
     <div className="view-citizens-container">
       <h2>All Politicians</h2>
-      <p>You cannot delete a Politician without prior investigation.
+      <p style={{color:"black"}}>You cannot delete a Politician without prior investigation.
         Because There are some entities associated with them.
       </p>
       <table className="citizens-table">

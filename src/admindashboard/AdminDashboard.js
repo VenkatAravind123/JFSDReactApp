@@ -12,6 +12,8 @@ import Politician from './../admin/Politician';
 import ViewIssueadmin from '../admin/ViewIssueadmin';
 import { AiOutlineFileText, AiOutlineForm } from 'react-icons/ai';
 import './AdminDashboard.css'
+import config from '../main/config';
+import NotFound from '../pages/NotFound';
 
 export default function AdminDashboard() 
 {
@@ -28,7 +30,7 @@ export default function AdminDashboard()
 
     const fetchCitizenCount = async () => {  
       try {  
-        const response = await fetch('http://localhost:2021/admin/citizencount');  
+        const response = await fetch(`${config.url}/admin/citizencount`);  
         if (!response.ok) {  
           throw new Error('Network response was not ok');  
         }  
@@ -41,7 +43,7 @@ export default function AdminDashboard()
 
     const fetchPoliticianCount = async () => {
       try {  
-        const response = await fetch('http://localhost:2021/admin/politiciancount');  
+        const response = await fetch(`${config.url}/admin/politiciancount`);  
         if (!response.ok) {  
           throw new Error('Network response was not ok');  
         }  
@@ -61,23 +63,23 @@ export default function AdminDashboard()
   return (
   <div className="admin-dashboard">  
       <AdminSideBar />  
+      {admindata && <h1>Welcome Admin {admindata.username}</h1>} 
+        <br/> 
       <div className="admin-content">  
-        {admindata && <h1>Welcome Admin {admindata.username}</h1>}  
-
         <div className="card-container">
           {citizencount !== null && (  
             <div className="card citizen-count">  
               <AiOutlineFileText className="icon" /> {/* Icon for citizen count */}
-              <h2>Citizen Count</h2>  
-              <p>{citizencount}</p>  
+              <h2 style={{color:"black"}}>Citizen Count</h2>  
+              <p style={{color:"black"}}>{citizencount}</p>  
             </div>  
           )}  
           
           {politiciancount !== null && (  
             <div className="card politician-count">  
               <AiOutlineForm className="icon" /> {/* Icon for politician count */}
-              <h2>Politician Count</h2>  
-              <p>{politiciancount}</p>  
+              <h2 style={{color:"black"}}>Politician Count</h2>  
+              <p style={{color:"black"}}>{politiciancount}</p>  
             </div>  
           )}
         </div>
@@ -92,6 +94,7 @@ export default function AdminDashboard()
      <Route path='/displaycitizen/:id' element={<Citizens/>} exact/>
      <Route path='/displaypolitician/:id' element={<Politician/>} exact/>
      <Route path='adminviewissue/:id' element={<ViewIssueadmin/>} exact/>
+     {/* <Route path='*' element={<NotFound/>} exact/> */}
      </Routes>
     </div>
   )

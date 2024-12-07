@@ -1,74 +1,98 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './SideBar.css'
+import './SideBar.css';
+import config from './../main/config';
 
-export default function Issue() 
-{
-    const [issue , setIssues] = useState(null);
 
-    const {id} = useParams();
+export default function Issue() {
+  const [issue, setIssues] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { id } = useParams();
 
-    useEffect(() => {
-        const fetchIssue = async () => 
-            {
-              if (id) 
-             { 
-                try 
-                {
-                  const response = await axios.get(`http://localhost:2021/citizen/displayissuebyid?id=${id}`);
-                  setIssues(response.data);
-                //console.log(response.data)
-                } 
-                catch (error) 
-                {
-                  console.error(error.message);
-                }
-              }
-            };
-        
-            fetchIssue();
-     
-    }, [id])
-    
-    const formatDate = (dateArray) => {  
-        // Create a new Date object from the array  
-        // In this array: [year, month, day, hour, minute, second, millisecond]  
-        const [year, month, day, hour, minute, second, millisecond] = dateArray;  
-      
-        // JavaScript Date months are 0-based (0 = January, 1 = February, etc.)  
-        // So we need to subtract 1 from the month value  
-        const date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000)); // convert nanoseconds to seconds  
-        
-        const options = {  
-          year: 'numeric',   
-          month: 'long',  
-          day: 'numeric',   
-          hour: '2-digit',   
-          minute: '2-digit',   
-          second: '2-digit',   
-          hour12: true  
-        };  
-      
-        return date.toLocaleString(undefined, options);  
-      }; 
+  useEffect(() => {
+    const fetchIssue = async () => {
+      if (id) {
+        try {
+          setLoading(true);
+          const response = await axios.get(`${config.url}/citizen/displayissuebyid?id=${id}`);
+          setIssues(response.data);
+        } catch (error) {
+          setError('Failed to fetch issue details');
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
 
-      
+    fetchIssue();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="issue-container">
+        <div className="loading">Loading issue details...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="issue-container">
+        <div className="error">{error}</div>
+      </div>
+    );
+  }
+
   return (
-    
-    
-        issue ? (
-            <div className='issue1-container'>
-              <h3>Issue </h3>
-            <img src={issue.image_url} alt='Image Here' className='image' />
-            <p><b>Description:</b>{issue.description}</p>
-            <p><b>Status :</b> {issue.status}</p>
-            <p><b>Posted At:</b>{formatDate(issue.createdAt)}</p>
-            <p><b>Citizen Posted:</b>{issue.citizen.name}</p>
+    <div className="issue-container">
+      {issue ? (
+        <div className="issue-details">
+          <div className="issue-header">
+            <h1>Issue Details</h1>
+            <span className="issue-status">{issue.status}</span>
+          </div>
+          
+          <div className="issue-image">
+            <img src={issue.image_url} alt="Issue" />
+          </div>
+
+          <div className="issue-content">
+            <div className="info-group">
+              <label>Description</label>
+              <p>{issue.description}</p>
             </div>
-            ) : (
-                <p style={{ color: "red", fontWeight: "bolder" }}>Issue Data Not Found</p>
-            )
-    
-  )
+
+            <div className="info-group">
+              <label>Constituency</label>
+              <p>{issue.constituency}</p>
+            </div>
+
+            <div className="info-group">
+              <label>Reported By</label>
+              <p>{issue.citizen?.name}</p>
+            </div>
+
+            <div className="info-group">
+              <label>Status</label>
+              <p className={`status-${issue.status?.toLowerCase()}`}>
+                {issue.status}
+              </p>
+            </div>
+
+            {issue.politician && (
+              <div className="info-group">
+                <label>Assigned To</label>
+                <p>{issue.politician.name}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="no-data">No issue found</div>
+      )}
+    </div>
+  );
 }

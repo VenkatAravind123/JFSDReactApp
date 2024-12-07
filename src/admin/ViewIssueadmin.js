@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import config from '../main/config';
 
 export default function ViewIssueadmin() 
 {
@@ -15,7 +16,7 @@ export default function ViewIssueadmin()
              { 
                 try 
                 {
-                  const response = await axios.get(`http://localhost:2021/admin/viewissuebyid?id=${id}`);
+                  const response = await axios.get(`${config.url}/admin/viewissuebyid?id=${id}`);
                   setIssues(response.data);
                 //console.log(response.data)
                 } 

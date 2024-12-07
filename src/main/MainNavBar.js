@@ -10,10 +10,6 @@ import ContactUs from './ContactUs';
 import DashBoard from '../citizendashboard/DashBoard';
 
 import PoliticianDashboard from '../politiciandashboard/PoliticianDashboard';
-import PoliticianFeed from '../pages/PoliticianFeed';
-import PoliticianReports from '../pages/PoliticianReports';
-import MyRating from './../pages/MyRating';
-import MyPosts from './../pages/MyPosts';
 import AdminDashboard from '../admindashboard/AdminDashboard';
 import AdminLogin from '../admin/AdminLogin';
 import NotFound from '../pages/NotFound';
@@ -59,7 +55,7 @@ export default function MainNavBar({ onAdminLogin,onCitizenLogin,onPoliticianLog
         
     </Routes>
     <footer style={{ textAlign:"center", fontWeight:"bold" ,paddingBottom:"10px"}}>
-            <p>&copy; {new Date().getFullYear()} Jana SevaAP All Rights Reserved</p>
+            <p style={{color:"black"}}>&copy; {new Date().getFullYear()} Jana SevaAP All Rights Reserved</p>
     </footer>
     </div>
 

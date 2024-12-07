@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import admin from '../images/admin.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import config from '../main/config';
 export default function AdminLogin( {onAdminLogin}) 
 {
 
@@ -22,7 +23,7 @@ export default function AdminLogin( {onAdminLogin})
    const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:2021/admin/checkadminlogin?username=${formdata.username}&pwd=${formdata.password}`);
+      const response = await axios.post(`${config.url}/admin/checkadminlogin?username=${formdata.username}&pwd=${formdata.password}`);
       // console.log("Response:", response);  // Check the full response object
   console.log(response.data)
       if (response.data) {

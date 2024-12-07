@@ -1,4 +1,4 @@
-.feed {
+/* .feed {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -86,7 +86,118 @@
 
 .cta a:first-of-type:hover {
 	background: #388e3c;
-}
+} */
+
+/* feed.css */
+.feed-container {
+	max-width: 1200px;
+	margin: 50px auto;
+	padding: 20px;
+  }
+  
+  .feed {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 30px;
+	padding: 20px;
+  }
+  
+  .issue-container {
+	background: white;
+	border-radius: 15px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	transition: transform 0.3s ease;
+  }
+  
+  .issue-container:hover {
+	transform: translateY(-5px);
+  }
+  
+  .cta {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+  }
+  
+  .issue-image {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+  }
+  
+  .cta__text-column {
+	padding: 20px;
+	flex-grow: 1;
+  }
+  
+  .cta__text-column h2 {
+	color: #2c3e50;
+	font-size: 1.4rem;
+	margin-bottom: 15px;
+	line-height: 1.4;
+  }
+  
+  .cta__text-column button {
+	background: #178ccb;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 25px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-top: 15px;
+  }
+  
+  .cta__text-column button:hover {
+	background: #0097b2;
+	transform: translateY(-2px);
+  }
+  
+  .cta p {
+	padding: 0 20px 15px;
+	color: #666;
+	font-size: 0.9rem;
+  }
+  
+  .no-constituency {
+	text-align: center;
+	padding: 40px;
+	background: white;
+	border-radius: 15px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-constituency p {
+	color: #666;
+	font-size: 1.1rem;
+  }
+  
+  .no-constituency a {
+	color: #00c3ea;
+	text-decoration: none;
+	font-weight: 500;
+  }
+  
+  .no-constituency a:hover {
+	text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+	.feed {
+	  grid-template-columns: 1fr;
+	}
+	
+	.feed-container {
+	  margin: 20px auto;
+	}
+	
+	.issue-container {
+	  margin-bottom: 20px;
+	}
+  }
+
 
 
 /* Container styling */
@@ -143,4 +254,146 @@
   .admin-option:hover {
 	transform: scale(1.05);
   }
+
+
+  /* feed.css */
+.dropdown-container {
+	margin: 20px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+  }
   
+  .dropdown-container label {
+	margin-bottom: 10px;
+	font-size: 1.2rem;
+	color: #333;
+  }
+  
+  .dropdown {
+	padding: 10px;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 300px;
+	transition: border-color 0.3s ease;
+  }
+  
+  .dropdown:focus {
+	border-color: #00c3ea;
+	outline: none;
+  }
+  
+  .dropdown option {
+	padding: 10px;
+  }
+  
+
+
+  /* feed.css */
+.take-care-button {
+	background: #28a745;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+  }
+  
+  .take-care-button:hover {
+	background: #218838;
+  }
+  
+  .taken-care-button {
+	background: #d10e0e;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1rem;
+	cursor: not-allowed;
+  }
+
+
+  /* feed.css */
+  /* Feedback.css */
+.feedback-container {
+	max-width: 600px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+  }
+  
+  .form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+  }
+  
+  label {
+	font-weight: 600;
+	color: #333;
+  }
+  
+  input, textarea {
+	padding: 0.8rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+  }
+  
+  textarea {
+	resize: vertical;
+  }
+  
+  .star-rating {
+	display: flex;
+	gap: 0.5rem;
+  }
+  
+  .star-rating input[type="radio"] {
+	display: none;
+  }
+  
+  .star {
+	cursor: pointer;
+	transition: color 200ms;
+  }
+  
+  .submit-btn {
+	padding: 1rem;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 600;
+	transition: background-color 0.3s;
+  }
+  
+  .submit-btn:hover {
+	background-color: #45a049;
+  }
+  
+  input:focus, textarea:focus {
+	outline: none;
+	border-color: #4CAF50;
+	box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+
+  .readonly-input {
+	background-color: #f5f5f5;
+	cursor: not-allowed;
+  }

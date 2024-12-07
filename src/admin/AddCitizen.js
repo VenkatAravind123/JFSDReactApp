@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './admin.css'
 import axios from 'axios';
+import config from '../main/config';
 
 export default function AddCitizen() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ export default function AddCitizen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:2021/admin/addcitizen', formData);
+      const response = await axios.post(`${config.url}/admin/addcitizen`, formData);
       if (response.status === 200) {
         setMessage(response.data.message || 'Registration successful!');
         setFormData({

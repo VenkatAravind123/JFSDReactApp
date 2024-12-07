@@ -1,0 +1,137 @@
+/* Politician.css */
+.profile-card1 {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .profile-card1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(135deg, #00c3ea 0%, #0097b2 100%);
+    z-index: 0;
+  }
+  
+  .profile-card1 h2 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-details {
+    position: relative;
+    z-index: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  }
+  
+  .profile-details p {
+    font-size: 1.1rem;
+    margin: 20px 0;
+    padding: 15px;
+    color: #2c3e50;
+    border-bottom: 1px solid #eef2f7;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-details p:last-child {
+    border-bottom: none;
+  }
+  
+  .profile-details p:hover {
+    transform: translateX(10px);
+    background: #f8fafc;
+    border-radius: 8px;
+  }
+  
+  .profile-details strong {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-right: 10px;
+    min-width: 120px;
+    display: inline-block;
+  }
+  
+  @media (max-width: 768px) {
+    .profile-card1 {
+      margin: 20px;
+      padding: 20px;
+    }
+  
+    .profile-card1 h2 {
+      font-size: 2rem;
+    }
+  
+    .profile-details p {
+      font-size: 1rem;
+      padding: 10px;
+    }
+  
+    .profile-details strong {
+      min-width: 100px;
+    }
+  }
+
+  .loader {
+    --d:22px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    color: #25b09b;
+    box-shadow: 
+      calc(1*var(--d))      calc(0*var(--d))     0 0,
+      calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+      calc(0*var(--d))      calc(1*var(--d))     0 2px,
+      calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+      calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+      calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+      calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+    animation: l27 1s infinite steps(8);
+  }
+  @keyframes l27 {
+    100% {transform: rotate(1turn)}
+  }
+  /* Add to Politician.css */
+.edit-button-container {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .edit-button {
+    background: linear-gradient(45deg, #00c3ea, #0097b2);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 195, 234, 0.2);
+  }
+  
+  .edit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 195, 234, 0.3);
+  }
+  
+  .edit-button:active {
+    transform: translateY(0);
+  }

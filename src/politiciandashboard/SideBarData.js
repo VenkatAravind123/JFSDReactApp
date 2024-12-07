@@ -1,6 +1,8 @@
 import { MdBugReport, MdFeed, MdOutlineFeedback } from "react-icons/md";
 import React from 'react'
-import { FaSignsPost } from "react-icons/fa6";
+import { FaSignsPost } from "react-icons/fa6"
+import { RiGovernmentFill } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 
 export const SideBarData = [
     
@@ -11,9 +13,15 @@ export const SideBarData = [
         cName:'nav-text'
     },
     {
-        title:'PoliticianReport',
-        path:'/politiciandashboard/reports',
-        icon:<MdBugReport/>,
+        title:'Profile',
+        path:'/politiciandashboard/profile',
+        icon:<CgProfile/>,
+        cName:'nav-text'
+    },
+    {
+        title:'Government Schemes',
+        path:'/politiciandashboard/schemes',
+        icon:<RiGovernmentFill />,
         cName:'nav-text'
     },
     {

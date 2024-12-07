@@ -1,0 +1,253 @@
+/* PoliticianSchemes.css */
+.scheme-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .scheme-container h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+  
+  .scheme-form {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-weight: 500;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #00c3ea;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 195, 234, 0.1);
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, #00c3ea, #0097b2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 195, 234, 0.3);
+  }
+
+  /* Add to PoliticianSchemes.css */
+.schemes-table-container {
+    margin-top: 40px;
+    overflow-x: auto;
+  }
+  
+  .schemes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .schemes-table th,
+  .schemes-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .schemes-table th {
+    background: linear-gradient(45deg, #00c3ea, #0097b2);
+    color: white;
+    font-weight: 600;
+  }
+  
+  .schemes-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .schemes-table td {
+    color: #333;
+  }
+  
+  h2 {
+    color: #2c3e50;
+    margin: 30px 0 20px;
+    font-size: 1.5rem;
+  }
+
+
+  /* CitizenSchemes.js */
+  /* CitizenSchemes.css */
+.schemes-container {
+  padding: 2rem;
+  
+  min-height: 100vh;
+}
+
+.schemes-container h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.schemes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.scheme-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.scheme-card:hover {
+  transform: translateY(-5px);
+}
+
+.scheme-header {
+  background: linear-gradient(45deg, #00c3ea, #0097b2);
+  color: white;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.scheme-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.deadline-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.scheme-content {
+  padding: 1.5rem;
+}
+
+.info-section {
+  margin-bottom: 1.5rem;
+}
+
+.info-section h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.info-section p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.info-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.info-section li {
+  color: #666;
+  padding: 5px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.info-section li:before {
+  content: "•";
+  color: #00c3ea;
+  position: absolute;
+  left: 0;
+}
+
+.apply-button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(45deg, #00c3ea, #0097b2);
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.apply-button:hover {
+  background: linear-gradient(45deg, #0097b2, #00c3ea);
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+  .schemes-container {
+    padding: 1rem;
+  }
+  
+  .schemes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .scheme-card {
+    margin-bottom: 1rem;
+  }
+}
+
+
+/* Scheme.js
+ */
+
+ /* SchemeDetails.css */

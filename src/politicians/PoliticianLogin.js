@@ -3,6 +3,7 @@ import politician from '../images/politician.png'
 import './politician.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import config from '../main/config';
 
 export default function PoliticianLogin({onPoliticianLogin}) 
 {
@@ -20,7 +21,7 @@ export default function PoliticianLogin({onPoliticianLogin})
    const handleSubmit = async (e)=>{
     e.preventDefault();
   try {
-    const response = await axios.post(`http://localhost:2021/politician/checkpoliticianlogin?email=${formdata.email}&pwd=${formdata.password}`);
+    const response = await axios.post(`${config.url}/politician/checkpoliticianlogin?email=${formdata.email}&pwd=${formdata.password}`);
     // console.log("Response:", response);  // Check the full response object
 console.log(response)
     if (response.data) {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import config from '../main/config';
 
 export default function ViewIssuePolitician()
 {
@@ -15,7 +16,7 @@ export default function ViewIssuePolitician()
              { 
                 try 
                 {
-                  const response = await axios.get(`http://localhost:2021/politician/displayissuebyid?id=${id}`);
+                  const response = await axios.get(`${config.url}/politician/displayissuebyid?id=${id}`);
                   setIssues(response.data);
                 //console.log(response.data)
                 } 

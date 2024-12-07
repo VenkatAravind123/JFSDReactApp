@@ -5,21 +5,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../citizendashboard/SideBar.css';
 import axios from 'axios';
 import { SideBarData } from '../citizendashboard/SideBarData';
-import { IconContext } from 'react-icons/lib';
-import './feed.css'
-
+import './feed.css';
+import config from '../main/config';
 
 function Feed() {
   const [sidebar, setSidebar] = useState(false);
   const [issues, setIssues] = useState([]);
+  const [constituency, setConstituency] = useState('');
   const [error, setError] = useState('');
-  
+
   const showSidebar = () => {
     setSidebar(!sidebar);
   };
 
   const navigate = useNavigate();
-  
+
   const logout = () => {
     localStorage.removeItem('isCitizenLoggedIn');
     localStorage.removeItem('citizen');
@@ -27,27 +27,32 @@ function Feed() {
     window.location.reload();
   };
 
-  const fetchIssues = async () => {
-    try {
-      const response = await axios.get('http://localhost:2021/citizen/viewallissues');
-      setIssues(response.data);
-    } catch (error) {
-      setError(error.message);
+  useEffect(() => {
+    const storedCitizenData = localStorage.getItem('citizen');
+    if (storedCitizenData) {
+      const parsedCitizenData = JSON.parse(storedCitizenData);
+      setConstituency(parsedCitizenData.constituency);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchIssues();
-  }, []);
+    const fetchIssues = async () => {
+      try {
+        const response = await axios.get(`${config.url}/citizen/viewissuesbyconstituency?constituency=${constituency}`);
+        setIssues(response.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    if (constituency) {
+      fetchIssues();
+    }
+  }, [constituency]);
+
   const formatDate = (dateArray) => {  
-    // Create a new Date object from the array  
-    // In this array: [year, month, day, hour, minute, second, millisecond]  
     const [year, month, day, hour, minute, second, millisecond] = dateArray;  
-  
-    // JavaScript Date months are 0-based (0 = January, 1 = February, etc.)  
-    // So we need to subtract 1 from the month value  
     const date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000)); // convert nanoseconds to seconds  
-    
     const options = {  
       year: 'numeric',   
       month: 'long',  
@@ -57,48 +62,51 @@ function Feed() {
       second: '2-digit',   
       hour12: true  
     };  
-  
     return date.toLocaleString(undefined, options);  
   }; 
 
-  const displayIssue = async (id) => 
-    {
-        try 
-        {
-          navigate(`/displayissue/${id}`)
-        } 
-        catch (error) 
-        {
-          console.error(error.message);
-        }
-    
+  const displayIssue = async (id) => {
+    try {
+      navigate(`/displayissue/${id}`);
+    } catch (error) {
+      console.error(error.message);
     }
+  };
 
   return (
-    
-      <div className='feed'>
-        
-      {issues.length > 0 ? (
-        issues.map((issue, index) => (
-          <div key={index} className="issue-container">
-            <article className="cta">
-              <img src={issue.image_url} alt={`Image for ${issue.description}`} className="issue-image" />
-              <div className="cta__text-column">
-                <h2>{issue.description}</h2>
-                <button onClick={()=>displayIssue(issue.id)} >Read all about it</button>
-              </div>
-              {/* <p><b>Posted At:</b>{formatDate(issue.createdAt)}</p>
-              <p><b>Citizen Name:</b>{issue.citizen.name}</p> */}
-            </article>
+    <div>
+      
+      <div className="feed-container">
+        {/* <h1>Citizen Feed</h1> */}
+        {constituency ? (
+          <div className='feed'>
+            {issues.length > 0 ? (
+              issues.map((issue, index) => (
+                <div key={index} className="issue-container">
+                  <article className="cta">
+                    <img src={issue.image_url} alt={`Image for ${issue.description}`} className="issue-image" />
+                    <div className="cta__text-column">
+                      <h2>{issue.description}</h2>
+                      <button onClick={() => displayIssue(issue.id)}>Read all about it</button>
+                    </div>
+                    <p>Posted At: {formatDate(issue.createdAt)}</p>
+                    <p>Posted By: {issue.citizen.name}</p>
+                  </article>
+                </div>
+              ))
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              <p style={{color:"black"}}>No issues found for the selected constituency.</p>
+            )}
           </div>
-        ))
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <p>No Issues Found</p>
-      )}
+        ) : (
+          <div className="no-constituency">
+            <p style={{color:"black"}}>No constituency found. Please <Link to="/citizendashboard/updateprofile">edit your profile</Link> to add your constituency.</p>
+          </div>
+        )}
       </div>
-    // </IconContext.Provider>
+    </div>
   );
 }
 

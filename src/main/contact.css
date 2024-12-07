@@ -1,4 +1,4 @@
-/* From Uiverse.io by nathann09 */ 
+/* From Uiverse.io by nathann09 
 .contact-container{
     display: flex;
     flex-direction: row;
@@ -78,4 +78,95 @@
   
   .signup-link a {
     text-decoration: underline;
-  }
+  } */
+
+  /* contact.css */
+.contact-us-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.contact-us-container h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.contact-us-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container input,
+.input-container textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+  border-color: #00c3ea;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 195, 234, 0.1);
+}
+
+.input-container input:hover,
+.input-container textarea:hover {
+  border-color: #00c3ea;
+}
+
+.text-area {
+  height: 150px;
+  resize: none;
+}
+
+.submit {
+  background: linear-gradient(45deg, #00c3ea, #0097b2);
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 195, 234, 0.3);
+}
+
+.submit:active {
+  transform: translateY(0);
+}
+
+.signup-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.signup-link a {
+  color: #00c3ea;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}

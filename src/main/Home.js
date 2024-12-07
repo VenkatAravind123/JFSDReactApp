@@ -11,25 +11,28 @@ export default function Home() {
   const citizenpage  = ()=>{
     navigate('/citizen')
   }
-  return (
+  // Home.js
+return (
+  <div className='home-container'>
     <div className='content-area'>
-      <div className='leaders-section'>
+      <div className='section-card leaders-section'>
         <img src={leader} alt="Leader Icon" className='section-icon' />
         <h2>LEADERS</h2>
         <p>LEADERS SHAPE THE SOCIETY</p>
-        <button onClick={leaderpage} className='leader'>
-        <span class="text">Get Started</span>
+        <button onClick={leaderpage} className='cta-button leader-btn'>
+          Login as Leader
         </button>
-      </div> 
-      <div className='citizens-section'>
+      </div>
+
+      <div className='section-card citizens-section'>
+        <img src={citizens} alt="Citizen Icon" className='section-icon' />
         <h2>CITIZENS</h2>
-        <p>CITIZENS CREATE THE SOCIETY</p>
-        <button  onClick={citizenpage} className='citizen'>
-        <span class="text">Get Started</span>
-</button>
-        <img src={citizens} alt="Citizens Icon" className='section-icon1' />
+        <p>CITIZENS BUILD THE NATION</p>
+        <button onClick={citizenpage} className='cta-button citizen-btn'>
+          Login as Citizen
+        </button>
       </div>
     </div>
-    
-  )
+  </div>
+);
 }

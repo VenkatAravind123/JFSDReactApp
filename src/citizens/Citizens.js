@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import config from '../main/config';
 
 export default function Citizens() 
 {
@@ -13,7 +14,7 @@ export default function Citizens()
      { 
         try 
         {
-          const response = await axios.get(`http://localhost:2021/admin/displaycitizenbyid?id=${id}`);
+          const response = await axios.get(`${config.url}/admin/displaycitizenbyid?id=${id}`);
           setCitizen(response.data);
         } 
         catch (error) 

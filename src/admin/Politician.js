@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import config from '../main/config';
 
 export default function Politician() {
   const [politician,setPolitician] = useState(null);
@@ -12,7 +13,7 @@ export default function Politician() {
      { 
         try 
         {
-          const response = await axios.get(`http://localhost:2021/admin/displaypoliticianbyid?id=${id}`);
+          const response = await axios.get(`${config.url}/admin/displaypoliticianbyid?id=${id}`);
           setPolitician(response.data);
         } 
         catch (error) 
@@ -35,6 +36,7 @@ export default function Politician() {
         <p><strong>Email:</strong> {politician.email}</p>
         <p><strong>Category:</strong> {politician.category}</p>
         <p><strong>Party Name:</strong> {politician.party}</p>
+        <p><strong>Constituency:</strong> {politician.constituency}</p>
       </div>
     ) : (
       <p style={{ color: "red", fontWeight: "bolder" }}>Citizen Data Not Found</p>

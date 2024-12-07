@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import '../citizendashboard/SideBar.css'
+import React, { useEffect, useState } from 'react';
+import '../citizendashboard/SideBar.css';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import config from '../main/config';
 
 function Reports() {
   const [formData, setFormData] = useState({
     description: '',
     image_url: '',
+    constituency: '',
   });
-const [citizendata,setCitizenData] = useState("")
-  const [message, setMessage] = useState("");
+  const [citizendata, setCitizenData] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,28 +30,62 @@ const [citizendata,setCitizenData] = useState("")
     e.preventDefault();
     try {
       const citizenId = citizendata.id;
-      const response = await axios.post(`http://localhost:2021/citizen/${citizenId}/issues`, formData);
-      console.log(response.data)
+      const response = await axios.post(`${config.url}/citizen/${citizenId}/issues`, formData);
+      
       if (response.status === 200) {
-        setMessage(response.data.message || 'Issue Created successful!');
+        toast.success('🎉 Issue Created Successfully!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+          style: {
+            backgroundColor: '#28a745',
+            color: 'white'
+          }
+        });
+        
         setFormData({
-            description: '',
-            image_url: '',
-            
+          description: '',
+          image_url: '',
+          constituency: '',
         });
       }
     } catch (error) {
-      console.error(error.message);
-      setMessage('Issue Creation failed. Please try again.');
+      toast.error('❌ Issue Creation Failed. Please try again.', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        style: {
+          backgroundColor: '#dc3545',
+          color: 'white'
+        }
+      });
     }
   };
 
   return (
     <div className="add-citizen-container">
-      <h2>Add Issue</h2>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      <h2>Post Your Issue</h2>
       <form className="add-citizen-form" onSubmit={handleSubmit}>
-        {message && <p className="success-message">{message}</p>}
-        
         <label>Description</label>
         <input 
           type="text" 
@@ -59,7 +96,6 @@ const [citizendata,setCitizenData] = useState("")
           placeholder="Enter Issue Description" 
         />
 
-
         <label>Image URL</label>
         <input 
           type="text" 
@@ -69,9 +105,18 @@ const [citizendata,setCitizenData] = useState("")
           required 
           placeholder="Enter Image Link" 
         />
-       
+        
+        <label>Constituency</label>
+        <input 
+          type="text" 
+          name="constituency" 
+          value={formData.constituency} 
+          onChange={handleChange} 
+          required 
+          placeholder="Enter Constituency" 
+        />
 
-        <button type="submit" className="submit-button">Add Citizen</button>
+        <button type="submit" className="submit-button">Add Issue</button>
       </form>
     </div>
   );
