@@ -13,7 +13,7 @@ export default function ViewAllPoliticians() {
 
   const fetchPoliticians = async () => {
     try {
-      const response = await axios.get('http://localhost:2021/admin/viewallpoliticians');
+      const response = await axios.get(`${config.url}/admin/viewallpoliticians`);
       setPoliticians(response.data);
       setLoading(false);
     } catch (error) {
