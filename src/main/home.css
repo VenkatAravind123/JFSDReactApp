@@ -1,144 +1,32 @@
-
-/* .home-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-} */
- /* home.css */
+/* Home Container - Clean styling for new component structure */
 .home-container {
-  min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 153, 51, 0.9) 0%, /* Saffron */
-    rgba(255, 255, 255, 0.9) 50%, /* White */
-    rgba(19, 136, 8, 0.9) 100% /* Green */
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  width: 100%;
+  background-color: var(--background);
 }
 
-.content-area {
-  display: flex;
-  gap: 4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  perspective: 1000px;
-}
-
-.section-card {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 3.5rem 2.5rem;
-  text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.leaders-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255, 140, 0, 0.1), rgba(255, 69, 0, 0.2));
-  z-index: -1;
-}
-
-.citizens-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(56, 142, 60, 0.2));
-  z-index: -1;
-}
-
-.section-card:hover {
-  transform: translateY(-10px) rotateX(5deg);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.section-icon {
-  width: 130px;
-  height: 130px;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.section-card:hover .section-icon {
-  transform: scale(1.15) translateY(-10px);
-}
-
-h2 {
-  color: white;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+/* Remove any default margins from elements */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
 }
 
 p {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2.5rem;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
 }
 
-.cta-button {
-  padding: 15px 40px;
-  border: none;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  font-weight: 600;
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.leader-btn {
-  background: linear-gradient(45deg, #ff8c00, #ff4500);
-  color: white;
-  box-shadow: 0 10px 20px rgba(255, 140, 0, 0.3);
+a {
+  color: inherit;
+  text-decoration: none;
 }
-
-.leader-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 30px rgba(255, 140, 0, 0.4);
-}
-
-.citizen-btn {
-  background: linear-gradient(45deg, #4CAF50, #388E3C);
-  color: white;
-  box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
-}
-
-.citizen-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
-}
-
-@media (max-width: 768px) {
-  .content-area {
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .section-card {
-    padding: 2.5rem 2rem;
-  }
-} 

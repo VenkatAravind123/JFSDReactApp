@@ -1,0 +1,103 @@
+/* Platform Glance (Stats) */
+.stats-section {
+  background-color: var(--surface-container-high);
+  padding: 64px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: var(--on-surface-variant);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stat-card {
+  text-align: center;
+  padding: 48px 32px;
+  background-color: var(--surface-container-lowest);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1;
+  font-family: var(--font-headline);
+}
+
+.stat-citizen {
+  color: var(--primary);
+}
+
+.stat-resolved {
+  color: var(--secondary);
+}
+
+.stat-initiatives {
+  color: var(--primary-container);
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--outline);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    padding: 48px 0;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .stats-grid {
+    gap: 32px;
+  }
+
+  .stat-card {
+    padding: 32px 20px;
+  }
+
+  .stat-number {
+    font-size: 40px;
+  }
+}

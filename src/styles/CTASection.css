@@ -1,0 +1,140 @@
+/* Bento Grid CTA */
+.cta-section {
+  padding: 64px 0;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .cta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cta-card {
+  padding: 56px 48px;
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+  border-width: 1px;
+  border-style: solid;
+  transition: all 0.3s ease;
+}
+
+.cta-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.cta-card-citizen {
+  background-color: var(--surface-container-low);
+  border-color: var(--outline-variant);
+}
+
+.cta-card-politician {
+  background-color: var(--primary);
+  border-color: var(--primary-container);
+  color: var(--on-primary);
+}
+
+.cta-card-content {
+  position: relative;
+  z-index: 10;
+}
+
+.cta-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.cta-icon.citizen {
+  color: var(--primary);
+}
+
+.cta-icon.politician {
+  color: var(--secondary-container);
+}
+
+.cta-title {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.cta-text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.cta-card-citizen .cta-text {
+  color: var(--on-surface-variant);
+}
+
+.cta-card-politician .cta-text {
+  color: var(--primary-fixed);
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.3s ease;
+  color: inherit;
+}
+
+.cta-card:hover .cta-link {
+  gap: 16px;
+}
+
+.cta-link.citizen {
+  color: var(--primary);
+}
+
+.cta-link.politician {
+  color: var(--secondary-container);
+}
+
+.bg-decoration {
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  opacity: 0.08;
+  transform: scale(1.5);
+  pointer-events: none;
+}
+
+.bg-decoration span {
+  font-size: 140px;
+}
+
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 48px 0;
+  }
+
+  .cta-card {
+    padding: 40px 24px;
+  }
+
+  .cta-title {
+    font-size: 22px;
+  }
+
+  .cta-text {
+    font-size: 14px;
+  }
+
+  .cta-icon {
+    font-size: 40px;
+  }
+}

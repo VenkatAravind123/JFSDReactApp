@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink ,Link, useNavigate } from 'react-router-dom';
 import './SideBar.css';
 import mylogo from '../images/jana.png';
 import { SideBarData } from './SideBarData';

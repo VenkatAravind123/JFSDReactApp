@@ -509,3 +509,477 @@ h4[style*="color:red"] {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* ===== MODERN CITIZEN LOGIN PAGE ===== */
+
+.citizen-login-page {
+  display: flex;
+  min-height: 100vh;
+  background: var(--background);
+  margin-top: -72px;
+  padding-top: 72px;
+}
+
+/* Left Side - Hero Section */
+.login-hero {
+  flex: 1;
+  background: linear-gradient(135deg, #e8eef7 0%, #dce4f0 100%);
+  padding: 60px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  max-width: 500px;
+}
+
+.hero-title {
+  font-family: var(--font-headline);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.hero-description {
+  font-size: 15px;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Features List */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feature-box {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  font-size: 32px;
+  min-width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 35, 111, 0.1);
+  border-radius: 12px;
+}
+
+.feature-box h3 {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 4px;
+}
+
+.feature-box p {
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Right Side - Login Form */
+.login-form-container {
+  flex: 1;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.login-header {
+  margin-bottom: 32px;
+}
+
+.login-header h2 {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+
+.login-header p {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+}
+
+/* Success & Error Messages */
+.success-message {
+  background: rgba(0, 184, 148, 0.1);
+  color: #00b894;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.error-message {
+  background: rgba(255, 76, 76, 0.1);
+  color: #ff4c4c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 16px;
+  color: var(--on-surface-variant);
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: var(--surface-container-lowest);
+}
+
+.input-wrapper input::placeholder {
+  color: var(--on-surface-variant);
+  opacity: 0.6;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 35, 111, 0.1);
+}
+
+.input-wrapper input:hover {
+  border-color: var(--outline);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: var(--on-surface-variant);
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: var(--on-surface);
+}
+
+/* Password Header */
+.password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-password {
+  font-size: 12px;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: var(--primary-container);
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-btn {
+  padding: 12px 24px;
+  background: var(--secondary);
+  color: var(--on-secondary);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(133, 83, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.arrow {
+  font-size: 16px;
+  transition: transform 0.3s;
+}
+
+.login-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--outline-variant);
+}
+
+.divider span {
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Google Login Button */
+.google-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--on-surface);
+}
+
+.google-btn:hover {
+  background: var(--surface-container);
+  border-color: var(--outline);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.google-btn:active {
+  transform: translateY(0);
+}
+
+/* Register Link */
+.register-link {
+  text-align: center;
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  margin-top: 20px;
+}
+
+.register-link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.register-link a:hover {
+  color: var(--primary-container);
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1024px) {
+  .citizen-login-page {
+    flex-direction: column;
+  }
+
+  .login-hero {
+    padding: 48px 32px;
+    min-height: auto;
+  }
+
+  .login-form-container {
+    padding: 32px;
+  }
+
+  .login-card {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .citizen-login-page {
+    flex-direction: column;
+    margin-top: -64px;
+    padding-top: 64px;
+  }
+
+  .login-hero {
+    padding: 40px 24px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .features-list {
+    gap: 20px;
+  }
+
+  .feature-box {
+    gap: 12px;
+  }
+
+  .login-form-container {
+    padding: 24px;
+  }
+
+  .login-card {
+    padding: 32px;
+  }
+
+  .login-header h2 {
+    font-size: 24px;
+  }
+
+  .input-wrapper input {
+    padding: 11px 11px 11px 36px;
+    font-size: 16px;
+  }
+
+  .login-btn,
+  .google-btn {
+    padding: 11px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-hero {
+    padding: 32px 16px;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .feature-box {
+    gap: 10px;
+  }
+
+  .feature-icon {
+    font-size: 28px;
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .feature-box h3 {
+    font-size: 14px;
+  }
+
+  .feature-box p {
+    font-size: 12px;
+  }
+
+  .login-form-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 24px;
+  }
+
+  .login-header h2 {
+    font-size: 22px;
+  }
+
+  .login-form {
+    gap: 16px;
+  }
+
+  .input-wrapper input {
+    padding: 10px 10px 10px 34px;
+  }
+
+  .login-btn,
+  .google-btn {
+    padding: 10px 16px;
+  }
+}

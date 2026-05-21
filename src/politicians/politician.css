@@ -1,203 +1,467 @@
 
-  
-  .login-container2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0;
-    /* background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.9) 50%,
-        rgba(255, 255, 255, 0.2) 100%
-    ); */
+/* ===== MODERN POLITICIAN LOGIN PAGE ===== */
+
+.politician-login-page {
+  display: flex;
+  min-height: 100vh;
+  background: var(--background);
+  margin-top: -72px;
+  padding-top: 72px;
 }
 
-/* Login form styles */
-.login-form2 {
-    flex: 0 1 50%;
-    padding: 3rem 4rem;
-    margin-left: 5%;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+/* Left Side - Dark Hero Section */
+.login-hero.politician-hero {
+  flex: 1;
+  background: linear-gradient(135deg, #001f4d 0%, #003380 50%, #0047b3 100%);
+  padding: 60px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.login-form2 h1 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
+.login-hero.politician-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="80" r="20" fill="rgba(255,255,255,0.02)"/><path d="M0 50 Q 25 25 50 50 T 100 50" stroke="rgba(255,255,255,0.03)" fill="none"/></svg>') repeat;
+  pointer-events: none;
 }
 
-.login-form2 h1::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 4px;
-    background: #4a90e2;
-    border-radius: 2px;
+.hero-content {
+  max-width: 500px;
+  position: relative;
+  z-index: 2;
+  color: white;
 }
 
-.login-form2 label {
-    display: block;
-    margin-bottom: 0.75rem;
-    color: #34495e;
-    font-weight: 600;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.login-hero.politician-hero .hero-title {
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
-.login-form2 input[type="email"],
-.login-form2 input[type="password"] {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 2rem;
-    border: 2px solid #e1e1e1;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
-    box-sizing: border-box;
+.login-hero.politician-hero .hero-description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
-.login-form2 input[type="email"]:focus,
-.login-form2 input[type="password"]:focus {
-    border-color: #4a90e2;
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
-    transform: translateY(-2px);
+.login-hero.politician-hero .features-list {
+  gap: 20px;
 }
 
-/* Buttons */
-.login-button,
-.clear-button {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.login-hero.politician-hero .feature-box {
+  gap: 16px;
 }
 
-.login-button2 {
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-    color: white;
+.login-hero.politician-hero .feature-icon {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
 }
 
-.login-button2:hover {
-    background: linear-gradient(135deg, #357abd 0%, #2c3e50 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+.login-hero.politician-hero .feature-box h3 {
+  color: white;
 }
 
-.clear-button {
-    background: linear-gradient(135deg, #f5f6f7 0%, #e1e1e1 100%);
-    color: #666;
+.login-hero.politician-hero .feature-box p {
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.clear-button:hover {
-    background: linear-gradient(135deg, #e1e1e1 0%, #d4d4d4 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+/* Right Side - Login Form */
+.login-form-container {
+  flex: 1;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
 }
 
-/* Links section */
-.aline {
-    display: flex;
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.login-header {
+  margin-bottom: 32px;
+}
+
+.login-header h2 {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+
+.login-header p {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+}
+
+/* Success & Error Messages */
+.success-message {
+  background: rgba(0, 184, 148, 0.1);
+  color: #00b894;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.error-message {
+  background: rgba(255, 76, 76, 0.1);
+  color: #ff4c4c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 16px;
+  color: var(--on-surface-variant);
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: var(--surface-container-lowest);
+}
+
+.input-wrapper input::placeholder {
+  color: var(--on-surface-variant);
+  opacity: 0.6;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: #001f4d;
+  box-shadow: 0 0 0 3px rgba(0, 31, 77, 0.1);
+}
+
+.input-wrapper input:hover {
+  border-color: var(--outline);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: var(--on-surface-variant);
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: var(--on-surface);
+}
+
+/* Password Header */
+.password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-password {
+  font-size: 12px;
+  color: #001f4d;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: #003380;
+  text-decoration: underline;
+}
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #001f4d;
+}
+
+/* Login Button */
+.login-btn {
+  padding: 12px 24px;
+  background: #001f4d;
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+
+.login-btn:hover {
+  background: #003380;
+  box-shadow: 0 4px 12px rgba(0, 31, 77, 0.3);
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.arrow {
+  font-size: 16px;
+  transition: transform 0.3s;
+}
+
+.login-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Security Warning */
+.security-warning {
+  background: rgba(255, 76, 76, 0.08);
+  border: 1px solid rgba(255, 76, 76, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin: 24px 0;
+  display: flex;
+  gap: 12px;
+}
+
+.warning-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.security-warning h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c41e1e;
+  margin: 0 0 4px 0;
+}
+
+.security-warning p {
+  font-size: 12px;
+  color: #a01818;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Admin Contact */
+.admin-contact {
+  text-align: center;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  margin-top: 16px;
+}
+
+.admin-contact a {
+  color: #001f4d;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.admin-contact a:hover {
+  color: #003380;
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1024px) {
+  .politician-login-page {
     flex-direction: column;
+  }
+
+  .login-hero {
+    padding: 48px 32px;
+    min-height: auto;
+  }
+
+  .login-form-container {
+    padding: 32px;
+  }
+
+  .login-card {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .politician-login-page {
+    flex-direction: column;
+    margin-top: -64px;
+    padding-top: 64px;
+  }
+
+  .login-hero {
+    padding: 40px 24px;
+  }
+
+  .login-hero.politician-hero .hero-title {
+    font-size: 28px;
+  }
+
+  .login-hero.politician-hero .hero-description {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .features-list {
+    gap: 20px;
+  }
+
+  .feature-box {
     gap: 12px;
-    margin: 2rem 0;
-    text-decoration: none;
-    text-align: center;
+  }
+
+  .login-form-container {
+    padding: 24px;
+  }
+
+  .login-card {
+    padding: 32px;
+  }
+
+  .login-header h2 {
+    font-size: 24px;
+  }
+
+  .input-wrapper input {
+    padding: 11px 11px 11px 36px;
+    font-size: 16px;
+  }
+
+  .login-btn {
+    padding: 11px 20px;
+    font-size: 13px;
+  }
 }
 
-.aline a {
-    color: #4a90e2;
-    
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-}
+@media (max-width: 480px) {
+  .login-hero {
+    padding: 32px 16px;
+  }
 
-.aline a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 50%;
-    background: #4a90e2;
-    transition: all 0.3s ease;
-}
+  .login-hero.politician-hero .hero-title {
+    font-size: 24px;
+  }
 
-.aline a:hover {
-    color: #2c3e50;
-}
+  .login-hero.politician-hero .hero-description {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
 
-.aline a:hover::after {
-    width: 100%;
-    left: 0;
-}
+  .feature-box {
+    gap: 10px;
+  }
 
-/* Message and error styles */
-h4 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    padding: 15px;
-    border-radius: 12px;
-    font-weight: 600;
-}
+  .feature-icon {
+    font-size: 28px;
+    min-width: 40px;
+    height: 40px;
+  }
 
-h4:not([style]) {
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-    color: #155724;
-}
+  .feature-box h3 {
+    font-size: 14px;
+  }
 
-h4[style*="color:red"] {
-    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-    color: #721c24;
-}
+  .feature-box p {
+    font-size: 12px;
+  }
 
-/* Image styles */
-.poli {
-    flex: 0 1 45%;
-    max-height: 90vh;
-    object-fit: contain;
-    margin-right: 5%;
-    animation: float 6s ease-in-out infinite;
-}
+  .login-form-container {
+    padding: 16px;
+  }
 
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
+  .login-card {
+    padding: 24px;
+  }
 
-/* Responsive design */
+  .login-header h2 {
+    font-size: 22px;
+  }
+
+  .login-form {
+    gap: 16px;
+  }
+
+  .input-wrapper input {
+    padding: 10px 10px 10px 34px;
+  }
+
+  .login-btn {
+    padding: 10px 16px;
+  }
+}
 @media (max-width: 1200px) {
     .login-form2 {
         flex: 0 1 60%;

@@ -39,14 +39,11 @@
   --font-body: 'Inter', sans-serif;
 }
 
+/* Global Styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -54,6 +51,7 @@ body {
   background-color: var(--background);
   color: var(--on-surface);
   line-height: 1.5;
+  scroll-behavior: smooth;
 }
 
 img {
@@ -74,15 +72,4 @@ img {
   margin: 0 auto;
   padding-left: var(--margin-mobile);
   padding-right: var(--margin-mobile);
-}
-
-/* App Container */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  flex: 1;
 }

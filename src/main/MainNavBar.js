@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import logo from '../images/jana.png'
 import Home from './Home';
-import './style.css'
+import '../styles/Header.css'
 import CitizenRegistration from '../citizens/CitizenRegistration';
 import PoliticianLogin from '../politicians/PoliticianLogin';
 import CitizenLogin from '../citizens/CitizenLogin';
@@ -17,47 +17,53 @@ import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 
 Chart.register(CategoryScale);
-export default function MainNavBar({ onAdminLogin,onCitizenLogin,onPoliticianLogin}) 
-{
+
+export default function MainNavBar({ onAdminLogin, onCitizenLogin, onPoliticianLogin }) {
   const [chartData, setChartData] = useState({
     // ...chart data
   });
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <div className='app-container'>
-    <nav className='navbar'>
-      <div className="navbar-brand">
-        <img src={logo} alt="LOGO" className='logo' />
-        <h3>Jana SevaAP</h3>
-      </div>
-      <ul className="nav-links">
-        <li><Link to="/">HOME</Link></li>
-        <li><Link to="/citizen">CITIZENS</Link></li>
-        <li><Link to="/politician">POLITICIANS</Link></li>
-        <li><Link to="/register">REGISTRATION</Link></li>
-        <li><Link to="/contactus">CONTACT US</Link></li>
-      </ul>
-    </nav>
-    <Routes>
-    <Route path='/' element={<Home/>} exact />
-        <Route path='/citizen' element={<CitizenLogin onCitizenLogin={onCitizenLogin}/>}  exact/>
-        <Route path='/politician' element={<PoliticianLogin onPoliticianLogin={onPoliticianLogin}/>} exact/>
-        <Route path='/register' element={<CitizenRegistration/>} exact/>
-        <Route path='/contactus' element={<ContactUs/>} exact/>
-        <Route path='/citizendashboard/*' element={<DashBoard chartData={chartData}/>} exact/>
-      <Route path='/politiciandashboard/*' element={<PoliticianDashboard/>} exact/>
+      <header className='header'>
+        <nav className='container navbar'>
+          <div className="navbar-brand">
+            <img src={logo} alt="LOGO" className='logo' />
+            <h3>Jana SevaAP</h3>
+          </div>
+          <ul className="nav-links">
+            <li><Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>HOME</Link></li>
+            <li><Link to="/citizen" className={`nav-link ${isActive('/citizen') ? 'active' : ''}`}>CITIZENS</Link></li>
+            <li><Link to="/politician" className={`nav-link ${isActive('/politician') ? 'active' : ''}`}>POLITICIANS</Link></li>
+            <li><Link to="/register" className={`nav-link ${isActive('/register') ? 'active' : ''}`}>REGISTRATION</Link></li>
+            <li><Link to="/contactus" className={`nav-link ${isActive('/contactus') ? 'active' : ''}`}>CONTACT US</Link></li>
+          </ul>
+          <div className="nav-actions">
+            <button className="btn-login">Login</button>
+            <button className="mobile-menu-btn">
+              <span className="material-symbols-outlined">menu</span>
+            </button>
+          </div>
+        </nav>
+      </header>
       
-      <Route path='/adminlogin' element={<AdminLogin onAdminLogin={onAdminLogin}/>} exact/>
-<Route path='/admindashboard/*/*' element={<AdminDashboard/>} exact/>
-
-<Route path='*' element={<NotFound/>} exact/>
-  
-        
-    </Routes>
-    <footer style={{ textAlign:"center", fontWeight:"bold" ,paddingBottom:"10px"}}>
-            <p style={{color:"black"}}>&copy; {new Date().getFullYear()} Jana SevaAP All Rights Reserved</p>
-    </footer>
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/citizen' element={<CitizenLogin onCitizenLogin={onCitizenLogin} />} exact />
+          <Route path='/politician' element={<PoliticianLogin onPoliticianLogin={onPoliticianLogin} />} exact />
+          <Route path='/register' element={<CitizenRegistration />} exact />
+          <Route path='/contactus' element={<ContactUs />} exact />
+          <Route path='/citizendashboard/*' element={<DashBoard chartData={chartData} />} exact />
+          <Route path='/politiciandashboard/*' element={<PoliticianDashboard />} exact />
+          <Route path='/adminlogin' element={<AdminLogin onAdminLogin={onAdminLogin} />} exact />
+          <Route path='/admindashboard/*/*' element={<AdminDashboard />} exact />
+          <Route path='*' element={<NotFound />} exact />
+        </Routes>
+      </main>
     </div>
-
   )
 }
