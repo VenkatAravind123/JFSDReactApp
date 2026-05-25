@@ -54,7 +54,12 @@ export default function UpdateCitizenProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`${config.url}/citizen/updatecitizenprofile/${formData.id}`, formData);
+      const token = Cookies.get('citizenToken');
+      const response = await axios.put(`${config.url}/citizen/updatecitizenprofile/${formData.id}`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.status === 200) {
         setMessage('Profile updated successfully!');
         navigate('/citizendashboard/profile'); // Redirect to profile page
