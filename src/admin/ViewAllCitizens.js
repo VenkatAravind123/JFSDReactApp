@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AiOutlineEye } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function ViewAllCitizens() {
   const [citizens, setCitizens] = useState([]);
@@ -14,7 +15,12 @@ export default function ViewAllCitizens() {
 
   const fetchCitizens = async () => {
     try {
-      const response = await axios.get(`${config.url}/admin/viewcitizens`);
+      const token = Cookies.get('admintoken');
+      const response = await axios.get(`${config.url}/admin/viewcitizens`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setCitizens(response.data);
       setLoading(false);
     } catch (error) {
@@ -31,7 +37,12 @@ export default function ViewAllCitizens() {
     {
             try 
             {
-                await axios.delete(`${config.url}/admin/deletecitizen?id=${id}`);
+                const token = Cookies.get('admintoken');
+                await axios.delete(`${config.url}/admin/deletecitizen?id=${id}`, {
+                  headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+                });
                 fetchCitizens();
             } 
             catch (error) 

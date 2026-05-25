@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AiOutlineEye } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function ViewAllPoliticians() {
   const [politicians, setPoliticians] = useState([]);
@@ -13,7 +14,12 @@ export default function ViewAllPoliticians() {
 
   const fetchPoliticians = async () => {
     try {
-      const response = await axios.get(`${config.url}/admin/viewallpoliticians`);
+      const token = Cookies.get('admintoken');
+      const response = await axios.get(`${config.url}/admin/viewallpoliticians`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setPoliticians(response.data);
       setLoading(false);
     } catch (error) {
@@ -29,7 +35,12 @@ export default function ViewAllPoliticians() {
     {
             try 
             {
-                await axios.delete(`${config.url}/admin/deletepolitician?id=${id}`);
+                const token = Cookies.get('admintoken');
+                await axios.delete(`${config.url}/admin/deletepolitician?id=${id}`, {
+                  headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+                });
                 fetchPoliticians();
             } 
             catch (error) 

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { SideBarData } from '../politiciandashboard/SideBarData';
 import './feed.css';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function PoliticianFeed() {
   const [sidebar, setSidebar] = useState(false);
@@ -23,24 +24,42 @@ export default function PoliticianFeed() {
 
   const logout = () => {
     localStorage.removeItem('isPoliticianLoggedIn');
-    localStorage.removeItem('politician');
+    Cookies.remove('politiciantoken');
     navigate('/politician');
     window.location.reload();
   };
 
   useEffect(() => {
-    const storedPoliticianData = localStorage.getItem('politician');
-    if (storedPoliticianData) {
-      const parsedPoliticianData = JSON.parse(storedPoliticianData);
-      setConstituency(parsedPoliticianData.constituency);
-      setPoliticianId(parsedPoliticianData.id);
-    }
+    const fetchProfile = async () => {
+      try {
+        const token = Cookies.get('politiciantoken');
+        if (token) {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          setPoliticianId(payload.id);
+          
+          const response = await axios.get(`${config.url}/admin/displaypoliticianbyid?id=${payload.id}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          setConstituency(response.data.constituency);
+        }
+      } catch (e) {
+        console.error("Failed to fetch profile in Feed", e);
+      }
+    };
+    fetchProfile();
   }, []);
 
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get(`${config.url}/politician/viewissuesbyconstituency?constituency=${constituency}`);
+        const token = Cookies.get('politiciantoken');
+        const response = await axios.get(`${config.url}/politician/viewissuesbyconstituency?constituency=${constituency}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setIssues(response.data);
       } catch (error) {
         setError(error.message);
@@ -52,9 +71,17 @@ export default function PoliticianFeed() {
     }
   }, [constituency]);
 
-  const formatDate = (dateArray) => {  
-    const [year, month, day, hour, minute, second, millisecond] = dateArray;  
-    const date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000)); // convert nanoseconds to seconds  
+  const formatDate = (dateValue) => {  
+    if (!dateValue) return "Unknown Date";
+    
+    let date;
+    if (Array.isArray(dateValue)) {
+      const [year, month, day, hour, minute, second, millisecond = 0] = dateValue;  
+      date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000000)); 
+    } else {
+      date = new Date(dateValue);
+    }
+    
     const options = {  
       year: 'numeric',   
       month: 'long',  
@@ -77,20 +104,22 @@ export default function PoliticianFeed() {
 
   const takeCareIssue = async (issueId) => {
     try {
-      setLoadingIssueId(issueId); // Set loading state
-      const storedPoliticianData = localStorage.getItem('politician');
-      if (storedPoliticianData) {
-        const parsedPoliticianData = JSON.parse(storedPoliticianData);
+      setLoadingIssueId(issueId);
+      const token = Cookies.get('politiciantoken');
+      if (politicianId && token) {
         const response = await axios.put(`${config.url}/politician/takecareissue/${issueId}`, {
-          politicianId: parsedPoliticianData.id
+          politicianId: politicianId
+        }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
         });
         
         if (response.data === "Issue taken care of by politician") {
-          // Immediately update the issues state
           setIssues(prevIssues => 
             prevIssues.map(issue => 
               issue.id === issueId 
-                ? { ...issue, politician: parsedPoliticianData } 
+                ? { ...issue, politician: { id: politicianId } } 
                 : issue
             )
           );

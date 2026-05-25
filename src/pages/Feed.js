@@ -7,6 +7,7 @@ import axios from 'axios';
 import { SideBarData } from '../citizendashboard/SideBarData';
 import './feed.css';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 function Feed() {
   const [sidebar, setSidebar] = useState(false);
@@ -22,23 +23,44 @@ function Feed() {
 
   const logout = () => {
     localStorage.removeItem('isCitizenLoggedIn');
-    localStorage.removeItem('citizen');
+    Cookies.remove('citizenToken');
     navigate('/citizen');
     window.location.reload();
   };
 
   useEffect(() => {
-    const storedCitizenData = localStorage.getItem('citizen');
-    if (storedCitizenData) {
-      const parsedCitizenData = JSON.parse(storedCitizenData);
-      setConstituency(parsedCitizenData.constituency);
-    }
+    const fetchProfile = async () => {
+      try {
+        const token = Cookies.get('citizenToken');
+        if (token) {
+          const response = await fetch(`${config.url}/citizen/profile`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setConstituency(data.constituency);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch profile in Feed", e);
+      }
+    };
+    fetchProfile();
   }, []);
 
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get(`${config.url}/citizen/viewissuesbyconstituency?constituency=${constituency}`);
+        const token = Cookies.get('citizenToken');
+        if (!token) return;
+
+        const response = await axios.get(`${config.url}/citizen/viewissuesbyconstituency?constituency=${constituency}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setIssues(response.data);
       } catch (error) {
         setError(error.message);
@@ -50,9 +72,17 @@ function Feed() {
     }
   }, [constituency]);
 
-  const formatDate = (dateArray) => {  
-    const [year, month, day, hour, minute, second, millisecond] = dateArray;  
-    const date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000)); // convert nanoseconds to seconds  
+  const formatDate = (dateValue) => {  
+    if (!dateValue) return "Unknown Date";
+    
+    let date;
+    if (Array.isArray(dateValue)) {
+      const [year, month, day, hour, minute, second, millisecond = 0] = dateValue;  
+      date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000000)); 
+    } else {
+      date = new Date(dateValue);
+    }
+    
     const options = {  
       year: 'numeric',   
       month: 'long',  
@@ -63,7 +93,7 @@ function Feed() {
       hour12: true  
     };  
     return date.toLocaleString(undefined, options);  
-  }; 
+  };
 
   const displayIssue = async (id) => {
     try {

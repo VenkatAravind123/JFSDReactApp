@@ -11,31 +11,31 @@ export const SideBarData = [
         title:'Feed',
         path:'/citizendashboard/feed',
         icon:<MdFeed/>,
-        cName:'nav-text'
+        cName:'citizen-nav-text'
     },
     {
         title:'Profile',
         path:'/citizendashboard/profile',
         icon:<CgProfile />,
-        cName:'nav-text'
+        cName:'citizen-nav-text'
     },
     {
         title:'Government Schemes',
         path:'/citizendashboard/schemes',
         icon:<RiGovernmentFill/>,
-        cName:'nav-text'
+        cName:'citizen-nav-text'
     },
     {
         title:'Report',
         path:'/citizendashboard/reports',
         icon:<MdBugReport/>,
-        cName:'nav-text'
+        cName:'citizen-nav-text'
     },
     {
         title:'Feedback',
         path:'/citizendashboard/feedback',
         icon:<MdOutlineFeedback/>,
-        cName:'nav-text'
+        cName:'citizen-nav-text'
     },
     
 

@@ -6,6 +6,7 @@ import { AdminSideBarData } from './../admindashboard/AdminSideBarData';
 import axios from "axios";
 import './feed.css';
 import config from './../main/config';
+import Cookies from 'js-cookie';
 
 function AdminFeed() {
   const [sidebar, setSidebar] = useState(false);
@@ -35,7 +36,12 @@ function AdminFeed() {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get(`${config.url}/admin/viewissuebyconstituency/${selectedConstituency}`);
+        const token = Cookies.get('admintoken');
+        const response = await axios.get(`${config.url}/admin/viewissuebyconstituency/${selectedConstituency}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setIssues(response.data);
       } catch (error) {
         setError(error.message);
@@ -48,7 +54,12 @@ function AdminFeed() {
       // Fetch all issues if no constituency is selected
       const fetchAllIssues = async () => {
         try {
-          const response = await axios.get(`${config.url}/admin/viewallissues`);
+          const token = Cookies.get('admintoken');
+          const response = await axios.get(`${config.url}/admin/viewallissues`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
           setIssues(response.data);
         } catch (error) {
           setError(error.message);
@@ -58,18 +69,27 @@ function AdminFeed() {
     }
   }, [selectedConstituency]);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    };
-    return date.toLocaleString(undefined, options);
+  const formatDate = (dateValue) => {  
+    if (!dateValue) return "Unknown Date";
+    
+    let date;
+    if (Array.isArray(dateValue)) {
+      const [year, month, day, hour, minute, second, millisecond = 0] = dateValue;  
+      date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000000)); 
+    } else {
+      date = new Date(dateValue);
+    }
+    
+    const options = {  
+      year: 'numeric',   
+      month: 'long',  
+      day: 'numeric',   
+      hour: '2-digit',   
+      minute: '2-digit',   
+      second: '2-digit',   
+      hour12: true  
+    };  
+    return date.toLocaleString(undefined, options);  
   };
 
   const displayIssue =async (id) => {

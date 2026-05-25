@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './admin.css'
 import axios from 'axios';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function AddCitizen() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,12 @@ export default function AddCitizen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${config.url}/admin/addcitizen`, formData);
+      const token = Cookies.get('admintoken');
+      const response = await axios.post(`${config.url}/admin/addcitizen`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.status === 200) {
         setMessage(response.data.message || 'Registration successful!');
         setFormData({

@@ -69,152 +69,253 @@
     text-decoration: underline;
   } */
 
+  /* ===== MODERN CITIZEN REGISTRATION PAGE ===== */
+
+  .citizen-registration-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(240, 244, 255, 0.88) 0%, rgba(226, 235, 252, 0.88) 100%), 
+                url("../images/flag.png") no-repeat center center fixed;
+    background-size: cover;
+    padding: 80px 24px;
+  }
+
   .registration-container {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 840px;
+    width: 100%;
+    padding: 48px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 35, 111, 0.12);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
   }
   
+  .registration-header {
+    text-align: center;
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .back-home-btn {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .back-home-btn:hover {
+    color: var(--primary);
+    transform: translateY(-50%) translateX(-4px);
+  }
+
   .registration-container h2 {
     text-align: center;
-    margin-bottom: 30px;
-    color: #2c3e50;
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 0 10px 0;
+    color: var(--primary);
+    font-family: var(--font-headline);
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
   
   .registration-container p {
     text-align: center;
-    margin-bottom: 25px;
-    color: #636e72;
-    font-size: 1.1rem;
-  }
-  
-  .message {
-    color: #00b894;
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(0, 184, 148, 0.1);
+    margin: 0;
+    color: #64748b;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 500;
   }
   
   .registration-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+    text-align: left;
+  }
+  
+  .registration-form .form-group {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 6px;
+  }
+
+  .registration-form label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .registration-form .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .registration-form .input-wrapper .input-icon {
+    position: absolute;
+    left: 16px;
+    color: #64748b;
+    font-size: 16px;
+    pointer-events: none;
+    transition: color 0.2s ease;
   }
   
   .registration-form input,
   .registration-form select {
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-lg);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: #1e293b;
+    background-color: white;
+    transition: all 0.2s ease;
+  }
+
+  .registration-form .input-wrapper input,
+  .registration-form .input-wrapper select {
+    padding-left: 46px;
   }
   
   .registration-form input:focus,
   .registration-form select:focus {
-    border-color: #00c3ea;
-    box-shadow: 0 0 0 4px rgba(0, 195, 234, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 35, 111, 0.15);
     outline: none;
-    transform: translateY(-2px);
+  }
+
+  .registration-form .input-wrapper input:focus ~ .input-icon,
+  .registration-form .input-wrapper select:focus ~ .input-icon {
+    color: var(--primary);
   }
   
   .registration-form input:hover,
   .registration-form select:hover {
-    border-color: #00c3ea;
+    border-color: #cbd5e1;
   }
   
-  .registration-form button {
+  .registration-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    padding-right: 40px;
+  }
+  
+  .registration-form .toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+  }
+
+  .registration-form .toggle-password:hover {
+    color: var(--primary);
+  }
+
+  .registration-form button[type="submit"] {
+    grid-column: span 2;
     width: 100%;
     padding: 16px;
-    margin: 20px 0;
+    margin-top: 16px;
     border: none;
-    border-radius: 12px;
-    font-size: 1.2rem;
+    border-radius: var(--radius-lg);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    background: linear-gradient(135deg, #00c3ea 0%, #0097b2 100%);
+    letter-spacing: 1px;
+    background: var(--primary);
     color: white;
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 35, 111, 0.15);
   }
   
-  .registration-form button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #0097b2 0%, #006d80 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
+  .registration-form button[type="submit"]:hover {
+    background: var(--primary-container);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 35, 111, 0.25);
   }
   
-  .registration-form button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 195, 234, 0.3);
-  }
-  
-  .registration-form button:hover::after {
-    opacity: 1;
-  }
-  
-  .registration-form button:active {
+  .registration-form button[type="submit"]:active {
     transform: translateY(0);
   }
   
   .registration-container a {
-    color: #00c3ea;
+    color: var(--primary);
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  
-  .registration-container a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background: #00c3ea;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+    font-weight: 600;
+    transition: all 0.2s ease;
   }
   
   .registration-container a:hover {
-    color: #0097b2;
-  }
-  
-  .registration-container a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    color: var(--primary-container);
+    text-decoration: underline;
   }
   
   @media (max-width: 768px) {
+    .citizen-registration-page {
+      padding: 40px 16px;
+    }
+
     .registration-container {
-      margin: 20px;
-      padding: 30px;
+      padding: 32px 24px;
     }
     
+    .back-home-btn {
+      position: static;
+      transform: none;
+      margin-bottom: 16px;
+      justify-content: center;
+    }
+
+    .back-home-btn:hover {
+      transform: translateX(-4px);
+    }
+
     .registration-container h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
+    }
+    
+    .registration-form {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .registration-form button[type="submit"] {
+      grid-column: span 1;
     }
   }
 
@@ -709,6 +810,8 @@ h4[style*="color:red"] {
 .toggle-password {
   position: absolute;
   right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   font-size: 16px;

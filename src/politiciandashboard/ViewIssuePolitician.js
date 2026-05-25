@@ -55,16 +55,52 @@ export default function ViewIssuePolitician()
 
       
   return (
-    issue ? (
-        <div className='issue1-container'>
-        <img src={issue.image_url} alt='Image Here' className='image' />
-        <p><b>Description:</b>{issue.description}</p>
-        <p><b>Status :</b> {issue.status}</p>
-        <p><b>Posted At:</b>{formatDate(issue.createdAt)}</p>
-        <p><b>Citizen Posted:</b>{issue.citizen.name}</p>
+    <div className="politician-issue-container">
+      {issue ? (
+        <div className="politician-issue-details">
+          <div className="politician-issue-header">
+            <h1>Issue Details</h1>
+            <span className="politician-issue-status">{issue.status}</span>
+          </div>
+          
+          <div className="politician-issue-split-layout">
+            <div className="politician-issue-image">
+              <img src={issue.image_url} alt="Community reported issue visual" />
+            </div>
+
+            <div className="politician-issue-content">
+              <div className="politician-info-group">
+                <label>Description</label>
+                <p>{issue.description}</p>
+              </div>
+
+              <div className="politician-info-group">
+                <label>Constituency</label>
+                <p>{issue.constituency || 'N/A'}</p>
+              </div>
+
+              <div className="politician-info-group">
+                <label>Reported By</label>
+                <p>{issue.citizen?.name || 'Anonymous Citizen'}</p>
+              </div>
+
+              <div className="politician-info-group">
+                <label>Current Status</label>
+                <p className={`status-${issue.status?.toLowerCase()}`}>
+                  {issue.status}
+                </p>
+              </div>
+
+              <div className="politician-info-group">
+                <label>Posted At</label>
+                <p>{formatDate(issue.createdAt)}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        ) : (
-            <p style={{ color: "red", fontWeight: "bolder" }}>Issue Data Not Found</p>
-        )
-  )
+      ) : (
+        <div className="politician-no-data">Issue Details Not Found</div>
+      )}
+    </div>
+  );
 }

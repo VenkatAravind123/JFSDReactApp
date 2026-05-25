@@ -1,146 +1,298 @@
+/* ===== MODERN POLITICIAN NAVBAR & SIDEBAR SYSTEM ===== */
+
+/* Glassmorphic Top Navbar */
 .navbar2 {
-    background: #0085ea;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    padding: 0 30px;
-  }
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(0, 35, 111, 0.05);
+  transition: all 0.3s ease;
+}
 
-  .menu-bars1 {
-    margin-left: 1rem;
-    font-size: 2rem;
-    background: none;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: white;
-  }
-  
-  .menu-bars1:hover {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
-  }
-  
-  .menu-bars1:active {
-    transform: scale(0.95);
-  }
-
-  .nav-menu {
-    background: linear-gradient(180deg, #00c3ea 0%, #0097b2 100%);
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 999;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
-    padding-top: 80px;
-  }
-  
-  .nav-menu.active {
-    left: 0;
-  }
-
-  .nav-text {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    list-style: none;
-    transition: all 0.3s ease;
-    border-left: 4px solid transparent;
-  }
-  .nav-text:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-left: 4px solid white;
-    transform: translateX(5px);
-  }
-  
-  
-  .nav-text a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    transition: all 0.3s ease;
-  }
-  .nav-text svg {
-    margin-right: 15px;
-    font-size: 1.4rem;
-  }
-
-  .nav-text:hover a {
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  }
-
-
-  .nav-menu-items {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-  
-  .navbar-toggle {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 20px;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  .navbar-toggle .menu-bars {
-    font-size: 1.5rem;
-    color: white;
-    transition: transform 0.3s ease;
-  }
-  
-  .navbar-toggle .menu-bars:hover {
-    transform: rotate(90deg);
-  }
-/* 
-span{
-    margin-left: 16px;
-} */
 .logo-section {
-    display: flex;
-    align-items: center;
-    gap: 25px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menu-bars1 {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary) !important; /* Force to dark blue in header */
+  padding: 8px;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+}
+
+.navbar2 .menu-bars1 svg {
+  color: var(--primary) !important;
+  fill: var(--primary) !important;
+}
+
+.menu-bars1:hover {
+  background: var(--surface-container-low);
+  transform: scale(1.05);
+}
+
+.menu-bars1:active {
+  transform: scale(0.95);
+}
+
+.politician-logo {
+  height: 38px;
+  width: auto;
+  border-radius: var(--radius-lg);
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 35, 111, 0.1));
+}
+
+.logo-section h3 {
+  color: var(--primary);
+  font-family: var(--font-headline);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  padding-left: 0;
+}
+
+/* Elegant Logout Button */
+.logout13 {
+  padding: 10px 24px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 30px;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface-variant);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.logout13:hover {
+  background: #fff0f0;
+  color: #dc2626;
+  border-color: #fecaca;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+}
+
+.logout13:active {
+  transform: translateY(0);
+}
+
+/* Modern Sliding Navigation Menu */
+.politician-nav-menu {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  box-shadow: 8px 0 32px rgba(0, 0, 0, 0.25);
+  padding: 88px 16px 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.politician-nav-menu.active {
+  left: 0;
+}
+
+.politician-nav-menu-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.politician-nav-text {
+  list-style: none;
+  border-radius: var(--radius-lg);
+  transition: all 0.25s ease;
+}
+
+.politician-nav-text a {
+  text-decoration: none;
+  color: #94a3b8;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  transition: all 0.25s ease;
+}
+
+.politician-nav-text svg {
+  margin-right: 14px;
+  font-size: 1.3rem;
+  color: #64748b;
+  transition: all 0.25s ease;
+}
+
+/* Active and Hover states */
+.politician-nav-text:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.politician-nav-text:hover a {
+  color: #ffffff;
+}
+
+.politician-nav-text:hover svg {
+  color: #38bdf8;
+  transform: scale(1.05);
+}
+
+/* Nav Toggle close button in Sidebar */
+.politician-navbar-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.politician-navbar-toggle .menu-bars {
+  font-size: 1.4rem;
+  color: #94a3b8 !important;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.politician-navbar-toggle .menu-bars:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white !important;
+  transform: rotate(90deg);
+}
+
+/* Session Timeout Warning Modal (Frosted Glass Effect) */
+.session-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  zIndex: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.session-modal-content {
+  background: #ffffff;
+  padding: 36px;
+  border-radius: var(--radius-xl);
+  text-align: center;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.session-modal-content h3 {
+  font-family: var(--font-headline);
+  color: #1e293b;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.session-modal-content p {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+.session-btn {
+  margin: 8px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.session-btn-extend {
+  background: var(--primary);
+  color: white;
+}
+
+.session-btn-extend:hover {
+  background: #1e3a8a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 35, 111, 0.2);
+}
+
+.session-btn-logout {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.session-btn-logout:hover {
+  background: #ffebe9;
+  color: #ef4444;
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar2 {
+    padding: 0 20px;
   }
-  .citizen-logo {
-    height: 40px;
-    transition: transform 0.3s ease;
+  .logo-section h3 {
+    font-size: 1.15rem;
   }
-  
   .logout13 {
-    margin-left: auto;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #00c3ea, #0097b2);
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 8px 18px;
+    font-size: 0.85rem;
   }
-  
-  .logout13:hover {
-    background: linear-gradient(45deg, #0097b2, #006d80);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .logout13:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-.politician-logo{
-    max-width:60px;
-    max-height:fit-content;
-    border-radius:10px;
 }

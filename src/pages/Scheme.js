@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SchemeDetails.css';
+import Cookies from 'js-cookie';
+import config from '../main/config';
 
 export default function Scheme() {
   const [scheme, setScheme] = useState(null);
@@ -12,7 +14,12 @@ export default function Scheme() {
 
   const fetchSchemeDetails = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:2021/citizen/viewscheme/${id}`);
+      const token = Cookies.get('citizenToken');
+      const response = await axios.get(`${config.url}/citizen/viewscheme/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setScheme(response.data);
     } catch (error) {
       console.error('Error fetching scheme details:', error);
@@ -23,9 +30,17 @@ export default function Scheme() {
 
   const checkApplicationStatus = useCallback(async () => {
     try {
-      const citizenId = JSON.parse(localStorage.getItem('citizen')).id;
-      const response = await axios.get(`http://localhost:2021/citizen/checkApplication/${id}/${citizenId}`);
-      setHasApplied(response.data);
+      const token = Cookies.get('citizenToken');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const citizenId = payload.id;
+        const response = await axios.get(`${config.url}/citizen/checkApplication/${id}/${citizenId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setHasApplied(response.data);
+      }
     } catch (error) {
       console.error('Error checking application status:', error);
     }
@@ -38,9 +53,17 @@ export default function Scheme() {
 
   const handleApply = async () => {
     try {
-      const citizenId = JSON.parse(localStorage.getItem('citizen')).id;
-      await axios.post(`http://localhost:2021/api/citizen/applyScheme/${id}/${citizenId}`);
-      setHasApplied(true);
+      const token = Cookies.get('citizenToken');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const citizenId = payload.id;
+        await axios.post(`${config.url}/citizen/applyScheme/${id}/${citizenId}`, {}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setHasApplied(true);
+      }
     } catch (error) {
       console.error('Error applying to scheme:', error);
     }

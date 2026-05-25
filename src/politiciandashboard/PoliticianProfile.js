@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Politician.css'
+import './Politician.css';
 import { useNavigate } from 'react-router-dom';
+import { FaUser, FaEnvelope, FaCalendarAlt, FaVenusMars, FaPhone, FaMapMarkerAlt, FaTag, FaBuilding } from 'react-icons/fa';
+import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function PoliticianProfile() {
   const [politiciandata, setPoliticianData] = useState({
@@ -24,17 +27,23 @@ export default function PoliticianProfile() {
   }
 
   useEffect(() => {
-    const fetchPoliticianData = () => {
+    const fetchPoliticianData = async () => {
       try {
-        const storedPoliticianData = localStorage.getItem('politician');
-        //console.log('Stored Politician Data:', storedPoliticianData); // Debug log
-
-        if (storedPoliticianData) {
-          const parsedPoliticianData = JSON.parse(storedPoliticianData);
-          //console.log('Parsed Politician Data:', parsedPoliticianData); // Debug log
-          setPoliticianData(parsedPoliticianData);
+        const token = Cookies.get('politiciantoken');
+        
+        if (token) {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          
+          // Fetch full profile from the backend
+          const response = await axios.get(`${config.url}/admin/displaypoliticianbyid?id=${payload.id}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          
+          setPoliticianData(response.data);
         } else {
-          setError('No politician data found');
+          setError('No authentication token found');
         }
       } catch (error) {
         console.error('Error fetching politician data:', error);
@@ -48,40 +57,85 @@ export default function PoliticianProfile() {
   }, []);
 
   if (loading) {
-    return <div class="loader"></div>;
+    return (
+      <div className="politician-profile-card1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '80px 0' }}>
+        <p style={{ color: '#64748b', fontWeight: '600' }}>Loading Profile Details...</p>
+      </div>
+    );
   }
-  /* HTML: <div class="loader"></div> */
-
 
   if (error) {
-    return <div className="profile-card1">{error}</div>;
+    return <div className="politician-profile-card1">{error}</div>;
   }
- 
+
+  const getInitials = (name) => {
+    if (!name) return 'P';
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .substring(0, 2)
+      .toUpperCase();
+  };
 
   return (
-    // PoliticianProfile.js
-<div className="profile-card1">
-  <h2>Politician Profile</h2>
-  {politiciandata && Object.keys(politiciandata).length > 0 ? (
-    <div className="profile-details">
-      <p><strong>Name:</strong> {politiciandata.name || 'N/A'}</p>
-      <p><strong>Email:</strong> {politiciandata.email || 'N/A'}</p>
-      <p><strong>Date of Birth:</strong> {politiciandata.dateofbirth || 'N/A'}</p>
-      <p><strong>Gender:</strong> {politiciandata.gender || 'N/A'}</p>
-      <p><strong>Contact Number:</strong> {politiciandata.contactnumber || 'N/A'}</p>
-      <p><strong>Constituency:</strong> {politiciandata.constituency || 'N/A'}</p>
-      <p><strong>Category:</strong> {politiciandata.category || 'N/A'}</p>
-      <p><strong>Party Name:</strong> {politiciandata.party || 'N/A'}</p>
+    <div className="politician-profile-card1">
+      {politiciandata && Object.keys(politiciandata).length > 0 ? (
+        <>
+          <div className="politician-profile-header-block">
+            <div className="politician-profile-avatar-large">
+              {getInitials(politiciandata.name)}
+            </div>
+            <div className="politician-profile-meta-title">
+              <h2>{politiciandata.name || 'Representative'}</h2>
+              <p>Government Representative &amp; Politician</p>
+            </div>
+          </div>
+
+          <div className="politician-profile-details-grid">
+            <div className="politician-profile-detail-item">
+              <label><FaUser /> Full Name</label>
+              <span>{politiciandata.name || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaEnvelope /> Email Address</label>
+              <span>{politiciandata.email || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaCalendarAlt /> Date of Birth</label>
+              <span>{politiciandata.dateofbirth || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaVenusMars /> Gender</label>
+              <span>{politiciandata.gender || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaPhone /> Contact Number</label>
+              <span>{politiciandata.contactnumber || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaMapMarkerAlt /> Voting Constituency</label>
+              <span>{politiciandata.constituency || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaTag /> Portfolio Category</label>
+              <span>{politiciandata.category || 'N/A'}</span>
+            </div>
+            <div className="politician-profile-detail-item">
+              <label><FaBuilding /> Political Party</label>
+              <span>{politiciandata.party || 'N/A'}</span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="profile-details">
+          <p>No politician data available</p>
+        </div>
+      )}
+      <div className="politician-edit-button-container">
+        <button className="politician-edit-button" onClick={editprofile}>Edit Profile</button>
+        <button className="politician-edit-button" onClick={changepassword}>Change Password</button>
+      </div>
     </div>
-  ) : (
-    <div className="profile-details">
-      <p>No politician data available</p>
-    </div>
-  )}
-  <div className="edit-button-container">
-    <button className="edit-button" onClick={editprofile}>Edit Profile</button>
-    <button className="edit-button" onClick={changepassword}>Change Password</button>
-  </div>
-</div>
   );
 }

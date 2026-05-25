@@ -13,13 +13,13 @@ export const AdminSideBarData = [
         title:'Feed',
         path:'/admindashboard/feed',
         icon:<MdFeed/>,
-        cName:'nav-text'
+        cName:'admin-nav-text'
     },
     {
         title:'Manage',
         path:'/admindashboard/manage',
         icon:<MdManageAccounts />,
-        cName:'nav-text'
+        cName:'admin-nav-text'
     },
     
 

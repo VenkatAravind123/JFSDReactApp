@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Schemes.css';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import config from '../main/config';
 
 const CitizenSchemes = () => {
   const [schemes, setSchemes] = useState([]);
@@ -11,7 +13,12 @@ const CitizenSchemes = () => {
   useEffect(() => {
     const fetchSchemes = async () => {
       try {
-        const response = await axios.get('http://localhost:2021/citizen/viewallschemes'); // Replace with your backend endpoint
+        const token = Cookies.get('citizenToken');
+        const response = await axios.get(`${config.url}/citizen/viewallschemes`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setSchemes(response.data);
       } catch (err) {
         setError(err);
@@ -41,7 +48,7 @@ const CitizenSchemes = () => {
     <div className="schemes-container">
       <h1>Government Schemes</h1>
       <div className="schemes-grid">
-        {schemes.map((scheme) => (
+        {schemes.length == 0 ? <h1>No Schemes are added by admin</h1> : schemes.map((scheme) => (
           <div key={scheme.id} className="scheme-card" onClick={() => navigate(`/citizendashboard/schemes/${scheme.id}`)}>
             <div className="scheme-header">
               <h2>{scheme.name}</h2>

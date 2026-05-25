@@ -6,20 +6,31 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './feed.css';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 function FeedBack() {
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    const citizenData = JSON.parse(localStorage.getItem('citizen'));
-    if (citizenData) {
-      setFormData(prevState => ({
-        ...prevState,
-        citizenname: citizenData.name,
-        constituency: citizenData.constituency
-      }));
-    }
+    const fetchProfile = async () => {
+      try {
+        const token = Cookies.get('citizenToken');
+        if (token) {
+          const response = await axios.get(`${config.url}/citizen/profile`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          setFormData(prevState => ({
+            ...prevState,
+            citizenname: response.data.name || '',
+            constituency: response.data.constituency || ''
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching profile for feedback:", error);
+      }
+    };
+    fetchProfile();
   }, []);
 
   const [formData, setFormData] = useState({
@@ -68,8 +79,12 @@ function FeedBack() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Update URL to match your backend endpoint
-      const response = await axios.post(`${config.url}/citizen/submitfeedback`, formData);
+      const token = Cookies.get('citizenToken');
+      const response = await axios.post(`${config.url}/citizen/submitfeedback`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       
       if (response.status === 200) {
         toast.success('Feedback submitted successfully!', {

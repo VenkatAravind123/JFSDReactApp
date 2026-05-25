@@ -3,6 +3,7 @@ import './politician.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function PoliticianLogin({onPoliticianLogin}) {
   const navigate = useNavigate();  
@@ -22,13 +23,18 @@ export default function PoliticianLogin({onPoliticianLogin}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${config.url}/politician/checkpoliticianlogin?email=${formdata.email}&pwd=${formdata.password}`);
-      if (response.data) {
+      const response = await axios.post(`${config.url}/politician/checkpoliticianlogin?email=${formdata.email}&password=${formdata.password}`);
+      const token = response.data;
+      
+      if (token && token !== "Failed") {
         onPoliticianLogin();
-        localStorage.setItem('politician', JSON.stringify(response.data));
+        
+        // Save the JWT token in cookies
+        Cookies.set('politiciantoken', token, { expires: 1 });
+        
         navigate("/politiciandashboard");
       } else {
-        setMessage("Login Failed");
+        setMessage("Login Failed: Invalid credentials");
         setError("");
       }
     } catch (error) {
@@ -135,6 +141,14 @@ export default function PoliticianLogin({onPoliticianLogin}) {
               Login to Dashboard <span className='arrow'>→</span>
             </button>
           </form>
+
+          <div className='divider'>
+            <span>OR</span>
+          </div>
+
+          <button type='button' onClick={() => navigate('/adminlogin')} className='admin-login-btn'>
+            🛡️ Access Admin Portal
+          </button>
 
           {/* Security Warning */}
           <div className='security-warning'>

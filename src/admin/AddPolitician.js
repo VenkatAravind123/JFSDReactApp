@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './admin.css'
 import axios from 'axios';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function AddPolitician() {
   const [formData, setFormData] = useState({
@@ -24,7 +25,12 @@ export default function AddPolitician() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${config.url}/admin/addpolitician`, formData);
+      const token = Cookies.get('admintoken');
+      const response = await axios.post(`${config.url}/admin/addpolitician`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.status === 200) {
         setMessage(response.data.message || 'Registration successful!');
         setFormData({

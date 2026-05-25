@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import AdminSideBar from './AdminSideBar'
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import AdminSideBar from './AdminSideBar';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import AdminFeed from '../pages/AdminFeed';
 import AdminManage from '../pages/AdminManage';
 import AddCitizen from '../admin/AddCitizen';
@@ -10,16 +10,16 @@ import ViewAllPoliticians from '../admin/ViewAllPoliticians';
 import Citizens from '../citizens/Citizens';
 import Politician from './../admin/Politician';
 import ViewIssueadmin from '../admin/ViewIssueadmin';
-import { AiOutlineFileText, AiOutlineForm } from 'react-icons/ai';
-import './AdminDashboard.css'
+import { FaUsers, FaUserTie } from 'react-icons/fa';
+import './AdminDashboard.css';
 import config from '../main/config';
-import NotFound from '../pages/NotFound';
+import Cookies from 'js-cookie';
 
-export default function AdminDashboard() 
-{
-  const [admindata,setAdminData] = useState("");
-  const [citizencount,setCitizenCount] = useState(null);
-  const [politiciancount,setPoliticianCount] = useState(null);
+export default function AdminDashboard() {
+  const [admindata, setAdminData] = useState("");
+  const [citizencount, setCitizenCount] = useState(null);
+  const [politiciancount, setPoliticianCount] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {  
     const storedAdminData = localStorage.getItem('admin');  
@@ -30,7 +30,12 @@ export default function AdminDashboard()
 
     const fetchCitizenCount = async () => {  
       try {  
-        const response = await fetch(`${config.url}/admin/citizencount`);  
+        const token = Cookies.get('admintoken');
+        const response = await fetch(`${config.url}/admin/citizencount`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (!response.ok) {  
           throw new Error('Network response was not ok');  
         }  
@@ -43,7 +48,12 @@ export default function AdminDashboard()
 
     const fetchPoliticianCount = async () => {
       try {  
-        const response = await fetch(`${config.url}/admin/politiciancount`);  
+        const token = Cookies.get('admintoken');
+        const response = await fetch(`${config.url}/admin/politiciancount`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (!response.ok) {  
           throw new Error('Network response was not ok');  
         }  
@@ -58,44 +68,64 @@ export default function AdminDashboard()
     fetchPoliticianCount(); 
   }, []); 
 
-  
+  const isDashboardHome = location.pathname === '/admindashboard' || location.pathname === '/admindashboard/';
 
   return (
-  <div className="admin-dashboard">  
+    <div className="admin-dashboard-container">  
       <AdminSideBar />  
-      {admindata && <h1>Welcome Admin {admindata.username}</h1>} 
-        <br/> 
-      <div className="admin-content">  
-        <div className="card-container">
-          {citizencount !== null && (  
-            <div className="card citizen-count">  
-              <AiOutlineFileText className="icon" /> {/* Icon for citizen count */}
-              <h2 style={{color:"black"}}>Citizen Count</h2>  
-              <p style={{color:"black"}}>{citizencount}</p>  
-            </div>  
-          )}  
-          
-          {politiciancount !== null && (  
-            <div className="card politician-count">  
-              <AiOutlineForm className="icon" /> {/* Icon for politician count */}
-              <h2 style={{color:"black"}}>Politician Count</h2>  
-              <p style={{color:"black"}}>{politiciancount}</p>  
-            </div>  
-          )}
-        </div>
-        </div>
-     <Routes>
-     <Route path='/admindashboard/feed' element={<AdminFeed/>} exact/>
-     <Route path='/admindashboard/manage' element={<AdminManage/>} exact/>
-     <Route path='/admindashboard/addcitizen' element={<AddCitizen/>} exact/>
-     <Route path='/admindashboard/addpolitician' element={<AddPolitician/>} exact/>
-     <Route path='/admindashboard/viewallcitizens' element={<ViewAllCitizens/>} exact/>
-     <Route path='/admindashboard/viewallpoliticians' element={<ViewAllPoliticians/>} exact/>
-     <Route path='/displaycitizen/:id' element={<Citizens/>} exact/>
-     <Route path='/displaypolitician/:id' element={<Politician/>} exact/>
-     <Route path='adminviewissue/:id' element={<ViewIssueadmin/>} exact/>
-     {/* <Route path='*' element={<NotFound/>} exact/> */}
-     </Routes>
+      
+      <div className="admin-main-content">
+        {isDashboardHome && admindata && (
+          <div className="admin-greeting-card">
+            <h1>Welcome back, Admin {admindata.username}</h1>
+            <p>System Command Console — Centralized Andhra Pradesh Grievance Services Control.</p>
+          </div>
+        )} 
+
+        {isDashboardHome && (
+          <div className="admin-stats-container">
+            {citizencount !== null && (  
+              <div className="admin-stat-card citizens-count-card">  
+                <div className="admin-stat-icon">
+                  <FaUsers />
+                </div>
+                <div className="admin-stat-details">
+                  <h2>Registered Citizens</h2>  
+                  <p>{citizencount}</p>  
+                </div>
+              </div>  
+            )}  
+            
+            {politiciancount !== null && (  
+              <div className="admin-stat-card politicians-count-card">  
+                <div className="admin-stat-icon">
+                  <FaUserTie />
+                </div>
+                <div className="admin-stat-details">
+                  <h2>Active Representatives</h2>  
+                  <p>{politiciancount}</p>  
+                </div>
+              </div>  
+            )}
+          </div>
+        )}
+
+        {!isDashboardHome && (
+          <div className="admin-subroute-wrapper">
+            <Routes>
+              <Route path='/admindashboard/feed' element={<AdminFeed/>} exact/>
+              <Route path='/admindashboard/manage' element={<AdminManage/>} exact/>
+              <Route path='/admindashboard/addcitizen' element={<AddCitizen/>} exact/>
+              <Route path='/admindashboard/addpolitician' element={<AddPolitician/>} exact/>
+              <Route path='/admindashboard/viewallcitizens' element={<ViewAllCitizens/>} exact/>
+              <Route path='/admindashboard/viewallpoliticians' element={<ViewAllPoliticians/>} exact/>
+              <Route path='/displaycitizen/:id' element={<Citizens/>} exact/>
+              <Route path='/displaypolitician/:id' element={<Politician/>} exact/>
+              <Route path='adminviewissue/:id' element={<ViewIssueadmin/>} exact/>
+            </Routes>
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }

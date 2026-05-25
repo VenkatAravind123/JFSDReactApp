@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './SideBar.css';
 import config from './../main/config';
+import Cookies from 'js-cookie';
 
 
 export default function Issue() {
@@ -16,7 +17,12 @@ export default function Issue() {
       if (id) {
         try {
           setLoading(true);
-          const response = await axios.get(`${config.url}/citizen/displayissuebyid?id=${id}`);
+          const token = Cookies.get('citizenToken');
+          const response = await axios.get(`${config.url}/citizen/displayissuebyid?id=${id}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
           setIssues(response.data);
         } catch (error) {
           setError('Failed to fetch issue details');
@@ -55,39 +61,41 @@ export default function Issue() {
             <span className="issue-status">{issue.status}</span>
           </div>
           
-          <div className="issue-image">
-            <img src={issue.image_url} alt="Issue" />
-          </div>
-
-          <div className="issue-content">
-            <div className="info-group">
-              <label>Description</label>
-              <p>{issue.description}</p>
+          <div className="issue-split-layout">
+            <div className="issue-image">
+              <img src={issue.image_url} alt="Issue Visual representation" />
             </div>
 
-            <div className="info-group">
-              <label>Constituency</label>
-              <p>{issue.constituency}</p>
-            </div>
-
-            <div className="info-group">
-              <label>Reported By</label>
-              <p>{issue.citizen?.name}</p>
-            </div>
-
-            <div className="info-group">
-              <label>Status</label>
-              <p className={`status-${issue.status?.toLowerCase()}`}>
-                {issue.status}
-              </p>
-            </div>
-
-            {issue.politician && (
+            <div className="issue-content">
               <div className="info-group">
-                <label>Assigned To</label>
-                <p>{issue.politician.name}</p>
+                <label>Description</label>
+                <p>{issue.description}</p>
               </div>
-            )}
+
+              <div className="info-group">
+                <label>Constituency</label>
+                <p>{issue.constituency}</p>
+              </div>
+
+              <div className="info-group">
+                <label>Reported By</label>
+                <p>{issue.citizen?.name || 'Anonymous'}</p>
+              </div>
+
+              <div className="info-group">
+                <label>Current Status</label>
+                <p className={`status-${issue.status?.toLowerCase()}`}>
+                  {issue.status}
+                </p>
+              </div>
+
+              {issue.politician && (
+                <div className="info-group">
+                  <label>Assigned Representative</label>
+                  <p>{issue.politician.name}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ) : (

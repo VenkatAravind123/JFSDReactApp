@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function ViewIssueadmin() 
 {
@@ -16,7 +17,12 @@ export default function ViewIssueadmin()
              { 
                 try 
                 {
-                  const response = await axios.get(`${config.url}/admin/viewissuebyid?id=${id}`);
+                  const token = Cookies.get('admintoken');
+                  const response = await axios.get(`${config.url}/admin/viewissuebyid?id=${id}`, {
+                    headers: {
+                      'Authorization': `Bearer ${token}`
+                    }
+                  });
                   setIssues(response.data);
                 //console.log(response.data)
                 } 
@@ -31,39 +37,46 @@ export default function ViewIssueadmin()
      
     }, [id])
 
-    const formatDate = (dateArray) => {  
-        // Create a new Date object from the array  
-        // In this array: [year, month, day, hour, minute, second, millisecond]  
-        const [year, month, day, hour, minute, second, millisecond] = dateArray;  
+    const formatDate = (dateValue) => {  
+      if (!dateValue) return "Unknown Date";
       
-        // JavaScript Date months are 0-based (0 = January, 1 = February, etc.)  
-        // So we need to subtract 1 from the month value  
-        const date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000)); // convert nanoseconds to seconds  
-        
-        const options = {  
-          year: 'numeric',   
-          month: 'long',  
-          day: 'numeric',   
-          hour: '2-digit',   
-          minute: '2-digit',   
-          second: '2-digit',   
-          hour12: true  
-        };  
+      let date;
+      if (Array.isArray(dateValue)) {
+        const [year, month, day, hour, minute, second, millisecond = 0] = dateValue;  
+        date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000000)); 
+      } else {
+        date = new Date(dateValue);
+      }
       
-        return date.toLocaleString(undefined, options);  
-      }; 
+      const options = {  
+        year: 'numeric',   
+        month: 'long',  
+        day: 'numeric',   
+        hour: '2-digit',   
+        minute: '2-digit',   
+        second: '2-digit',   
+        hour12: true  
+      };  
+      return date.toLocaleString(undefined, options);  
+    };
   return (
     issue ? (
         <div className='issue1-container'>
-        <img src={issue.image_url} alt='Image Here' className='image' />
-        <p><b>Description:</b>{issue.description}</p>
-        <p><b>Status :</b> {issue.status}</p>
-        <p><b>Posted At:</b>{formatDate(issue.createdAt)}</p>
-        <p><b>Citizen Posted:</b>{issue.citizen.name}</p>
+          <img src={issue.image_url} alt='Issue Visual' className='image' />
+          <div className='issue1-container-details'>
+            <p><b>Description</b> <span>{issue.description}</span></p>
+            <p>
+              <b>Status</b> 
+              <span className={`admin-status-badge status-${issue.status.toLowerCase()}`}>
+                {issue.status}
+              </span>
+            </p>
+            <p><b>Posted At</b> <span>{formatDate(issue.createdAt)}</span></p>
+            <p><b>Citizen Posted</b> <span>{issue.citizen.name}</span></p>
+          </div>
         </div>
-        ) : (
-            <p style={{ color: "red", fontWeight: "bolder" }}>Issue Data Not Found</p>
-        )
-
-  )
+    ) : (
+        <p style={{ color: "red", fontWeight: "bolder", textAlign: 'center', padding: '40px' }}>Issue Data Not Found</p>
+    )
+  );
 }

@@ -3,6 +3,7 @@ import './citizen.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function CitizenLogin({ onCitizenLogin }) {
   const navigate = useNavigate();
@@ -19,22 +20,52 @@ export default function CitizenLogin({ onCitizenLogin }) {
     setFormData({ ...formdata, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post(`${config.url}/citizen/checkcitizenlogin?email=${formdata.email}&pwd=${formdata.password}`);
+
+  //     if (response.data) {
+  //       onCitizenLogin();
+  //       localStorage.setItem('citizen', JSON.stringify(response.data));
+  //       navigate("/citizendashboard");
+  //     } else {
+  //       setMessage("Login Failed");
+  //       setError("");
+  //     }
+  //   } catch (error) {
+  //     setMessage("");
+  //     setError(error.message);
+  //   }
+  // };
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${config.url}/citizen/checkcitizenlogin?email=${formdata.email}&pwd=${formdata.password}`);
+      // Changed 'pwd' to 'password' to match the updated Spring Boot backend
+      const response = await axios.post(`${config.url}/citizen/checkcitizenlogin?email=${formdata.email}&password=${formdata.password}`);
 
-      if (response.data) {
+      const token = response.data;
+
+      // The backend returns "Failed" if login is unsuccessful
+      if (token && token !== "Failed") {
+        
+        // 1. Save the JWT Token in a cookie (expires in 1 day)
+        Cookies.set('citizenToken', token, { expires: 1, secure: true, sameSite: 'Strict' });
+        
+        // 2. Call your login handler
         onCitizenLogin();
-        localStorage.setItem('citizen', JSON.stringify(response.data));
+        
+        // 3. Navigate to dashboard
         navigate("/citizendashboard");
+        
       } else {
-        setMessage("Login Failed");
+        setMessage("Login Failed: Invalid Credentials");
         setError("");
       }
     } catch (error) {
       setMessage("");
-      setError(error.message);
+      setError("Server Error: " + error.message);
     }
   };
 

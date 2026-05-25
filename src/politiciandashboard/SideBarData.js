@@ -10,31 +10,31 @@ export const SideBarData = [
         title:'PoliticianFeed',
         path:'/politiciandashboard/feed',
         icon:<MdFeed/>,
-        cName:'nav-text'
+        cName:'politician-nav-text'
     },
     {
         title:'Profile',
         path:'/politiciandashboard/profile',
         icon:<CgProfile/>,
-        cName:'nav-text'
+        cName:'politician-nav-text'
     },
     {
         title:'Government Schemes',
         path:'/politiciandashboard/schemes',
         icon:<RiGovernmentFill />,
-        cName:'nav-text'
+        cName:'politician-nav-text'
     },
     {
         title:'MyRating',
         path:'/politiciandashboard/rating',
         icon:<MdOutlineFeedback/>,
-        cName:'nav-text'
+        cName:'politician-nav-text'
     },
     {
         title:'MyPosts',
         path:'/politiciandashboard/posts',
         icon:<FaSignsPost />,
-        cName:'nav-text'
+        cName:'politician-nav-text'
     }
 
 ]

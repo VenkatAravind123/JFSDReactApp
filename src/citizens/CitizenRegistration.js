@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './citizen.css';
 import config from '../main/config';
+import { 
+  FaUser, 
+  FaEnvelope, 
+  FaCalendarAlt, 
+  FaGenderless, 
+  FaIdCard, 
+  FaPhone, 
+  FaLock, 
+  FaMapMarkerAlt, 
+  FaEye, 
+  FaEyeSlash,
+  FaArrowLeft
+} from 'react-icons/fa';
 
 function CitizenRegistration() {
   const [formData, setFormData] = useState({
@@ -20,6 +33,7 @@ function CitizenRegistration() {
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   // const handleChange = (e) => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -182,122 +196,180 @@ const validateForm = () => {
   };
 
   return (
-    <div className="registration-container">
-      <ToastContainer 
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
-      <h2>CITIZEN REGISTRATION</h2>
-      <p>Register now to become a member of the Society.</p>
-      <form className="registration-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input 
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter Name"
-            required
-            className={errors.name ? 'error' : ''}
-          />
-          {errors.name && <span className="error-message">{errors.name}</span>}
+    <div className="citizen-registration-page">
+      <div className="registration-container">
+        <ToastContainer 
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+        <div className="registration-header">
+          <Link to="/" className="back-home-btn">
+            <FaArrowLeft /> Back to Home
+          </Link>
+          <h2>CITIZEN REGISTRATION</h2>
+          <p>Register now to access secure government services and stay connected.</p>
         </div>
-        <div className="form-group">
-          <input 
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter Email"
-            required
-            className={errors.email ? 'error' : ''}
-          />
-          {errors.email && <span className="error-message">{errors.email}</span>}
+        <form className="registration-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Full Name</label>
+            <div className="input-wrapper">
+              <FaUser className="input-icon" />
+              <input 
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter Name"
+                required
+                className={errors.name ? 'error' : ''}
+              />
+            </div>
+            {errors.name && <span className="error-message">{errors.name}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Email Address</label>
+            <div className="input-wrapper">
+              <FaEnvelope className="input-icon" />
+              <input 
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter Email"
+                required
+                className={errors.email ? 'error' : ''}
+              />
+            </div>
+            {errors.email && <span className="error-message">{errors.email}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Date of Birth</label>
+            <div className="input-wrapper">
+              <FaCalendarAlt className="input-icon" />
+              <input 
+                type="date"
+                name="dateofbirth"
+                value={formData.dateofbirth}
+                onChange={handleChange}
+                required
+                className={errors.dateofbirth ? 'error' : ''}
+              />
+            </div>
+            {errors.dateofbirth && <span className="error-message">{errors.dateofbirth}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Gender</label>
+            <div className="input-wrapper">
+              <FaGenderless className="input-icon" style={{ fontSize: '20px' }} />
+              <select 
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+                className={errors.gender ? 'error' : ''}
+              >
+                <option value="">Select Gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+            {errors.gender && <span className="error-message">{errors.gender}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Aadhaar Number</label>
+            <div className="input-wrapper">
+              <FaIdCard className="input-icon" />
+              <input 
+                type="text"
+                name="aadhaarnumber"
+                value={formData.aadhaarnumber}
+                onChange={handleChange}
+                placeholder="Enter Aadhaar Number"
+                required
+                className={errors.aadhaarnumber ? 'error' : ''}
+              />
+            </div>
+            {errors.aadhaarnumber && <span className="error-message">{errors.aadhaarnumber}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Contact Number</label>
+            <div className="input-wrapper">
+              <FaPhone className="input-icon" />
+              <input 
+                type="text"
+                name="contactnumber"
+                value={formData.contactnumber}
+                onChange={handleChange}
+                placeholder="Enter Contact Number"
+                required
+                className={errors.contactnumber ? 'error' : ''}
+              />
+            </div>
+            {errors.contactnumber && <span className="error-message">{errors.contactnumber}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+            <div className="input-wrapper">
+              <FaLock className="input-icon" />
+              <input 
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter Password"
+                required
+                className={errors.password ? 'error' : ''}
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            {errors.password && <span className="error-message">{errors.password}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Constituency</label>
+            <div className="input-wrapper">
+              <FaMapMarkerAlt className="input-icon" />
+              <input 
+                type="text"
+                name="constituency"
+                value={formData.constituency}
+                onChange={handleChange}
+                placeholder="Enter Constituency"
+                required
+                className={errors.constituency ? 'error' : ''}
+              />
+            </div>
+            {errors.constituency && <span className="error-message">{errors.constituency}</span>}
+          </div>
+
+          <button type="submit">Register</button>
+        </form>
+        <div className="register-link">
+          Already have an account?{' '}
+          <Link to="/citizen">Login here</Link>
         </div>
-        <div className="form-group">
-          <input 
-            type="date"
-            name="dateofbirth"
-            value={formData.dateofbirth}
-            onChange={handleChange}
-            required
-            className={errors.dateofbirth ? 'error' : ''}
-          />
-          {errors.dateofbirth && <span className="error-message">{errors.dateofbirth}</span>}
-        </div>
-        <div className="form-group">
-          <select 
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-            className={errors.gender ? 'error' : ''}
-          >
-            <option value="">Select Gender</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-            <option value="OTHER">Other</option>
-          </select>
-          {errors.gender && <span className="error-message">{errors.gender}</span>}
-        </div>
-        <div className="form-group">
-          <input 
-            type="text"
-            name="aadhaarnumber"
-            value={formData.aadhaarnumber}
-            onChange={handleChange}
-            placeholder="Enter Aadhaar Number"
-            required
-            className={errors.aadhaarnumber ? 'error' : ''}
-          />
-          {errors.aadhaarnumber && <span className="error-message">{errors.aadhaarnumber}</span>}
-        </div>
-        <div className="form-group">
-          <input 
-            type="text"
-            name="contactnumber"
-            value={formData.contactnumber}
-            onChange={handleChange}
-            placeholder="Enter Contact Number"
-            required
-            className={errors.contactnumber ? 'error' : ''}
-          />
-          {errors.contactnumber && <span className="error-message">{errors.contactnumber}</span>}
-        </div>
-        <div className="form-group">
-          <input 
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter Password"
-            required
-            className={errors.password ? 'error' : ''}
-          />
-          {errors.password && <span className="error-message">{errors.password}</span>}
-        </div>
-        <div className="form-group">
-          <input 
-            type="text"
-            name="constituency"
-            value={formData.constituency}
-            onChange={handleChange}
-            placeholder="Enter Constituency"
-            required
-            className={errors.constituency ? 'error' : ''}
-          />
-          {errors.constituency && <span className="error-message">{errors.constituency}</span>}
-        </div>
-        <button type="submit">Register</button>
-      </form>
+      </div>
     </div>
   );
 }

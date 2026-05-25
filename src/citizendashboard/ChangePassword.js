@@ -4,13 +4,24 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 function ChangePassword() {
   const [newPassword, setNewPassword] = useState('');
+  const [email, setEmail] = useState('');
   const navigate = useNavigate();
-  const storedCitizenData = JSON.parse(localStorage.getItem('citizen'));
-  const email = storedCitizenData?.email;
-  //console.log(email);
+  
+  React.useEffect(() => {
+    try {
+      const token = Cookies.get('citizenToken');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setEmail(payload.sub);
+      }
+    } catch (e) {
+      console.error("Failed to parse JWT in ChangePassword", e);
+    }
+  }, []);
 
   const handlePasswordChange = (e) => {
     setNewPassword(e.target.value);
@@ -73,60 +84,25 @@ function ChangePassword() {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="security-card-container">
       <ToastContainer />
-      <h2 style={styles.heading}>Change Password</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <h2>Change Password</h2>
+      <p className="subtitle">Secure your account by choosing a strong password</p>
+      <form onSubmit={handleSubmit} className="security-form">
+        <label htmlFor="new-password">New Password</label>
         <input
+          id="new-password"
           type="password"
+          className="security-input"
           value={newPassword}
           onChange={handlePasswordChange}
-          placeholder="Enter new password"
+          placeholder="Enter your new password"
           required
-          style={styles.input}
         />
-        <button type="submit" style={styles.button}>Change Password</button>
+        <button type="submit" className="security-button">Update Password</button>
       </form>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: '50px auto',
-    padding: '40px',
-    background: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: '15px',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center'
-  },
-  heading: {
-    fontSize: '2rem',
-    marginBottom: '20px',
-    color: '#2c3e50'
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px'
-  },
-  input: {
-    padding: '10px',
-    fontSize: '1rem',
-    borderRadius: '5px',
-    border: '1px solid #ccc'
-  },
-  button: {
-    padding: '10px 20px',
-    fontSize: '1rem',
-    borderRadius: '5px',
-    border: 'none',
-    background: '#00c3ea',
-    color: 'white',
-    cursor: 'pointer',
-    transition: 'background 0.3s ease'
-  }
-};
 
 export default ChangePassword;

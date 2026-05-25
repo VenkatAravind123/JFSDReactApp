@@ -3,6 +3,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Schemes.css';
+import config from '../main/config';
+import Cookies from 'js-cookie';
 
 export default function PoliticianSchemes() {
   const [formData, setFormData] = useState({
@@ -20,7 +22,12 @@ export default function PoliticianSchemes() {
 
   const fetchSchemes = async () => {
     try {
-      const response = await axios.get('http://localhost:2021/politician/viewschemes');
+      const token = Cookies.get('politiciantoken');
+      const response = await axios.get(`${config.url}/politician/viewschemes`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setSchemes(response.data);
     } catch (error) {
       console.error('Error fetching schemes:', error);
@@ -34,7 +41,12 @@ export default function PoliticianSchemes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:2021/politician/insertscheme', formData);
+      const token = Cookies.get('politiciantoken');
+      const response = await axios.post(`${config.url}/politician/insertscheme`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (response.status === 200) {
         toast.success('Scheme added successfully!');
         setFormData({

@@ -1,101 +1,269 @@
-.navbar3{
-    background-color: #289cf4;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+/* ===== SCOPED ADMIN SIDEBAR NAVIGATION ===== */
+
+.admin-navbar3 {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  height: 72px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  z-index: 100;
+  transition: all 0.3s ease;
 }
 
-.menu-bars{
-    margin-left: 2rem;
-    font-size: 2rem;
-    background: none;
-}
-.logo1{
-    max-width: 10px;
-    max-height: fit-content;
-}
-.nav-menu{
-    background-color: #34c3f3;
-    width: 250px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: 850ms;
+.admin-navbar3 h2 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  letter-spacing: -0.02em;
 }
 
-.nav-menu.active{
-    left: 0;
-    transition: 350ms;
+.admin-menu-bars {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transition: all 0.2s ease;
+  padding: 8px;
+  border-radius: 50%;
 }
 
-.nav-text{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 60px;
+.admin-menu-bars:hover {
+  background-color: rgba(0, 35, 111, 0.08);
+  transform: scale(1.05);
 }
 
-.nav-text a{
-    text-decoration: none;
-    color:#f5f5f5;
-    font-size: 18px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 4px;
-
+.admin-nav-menu {
+  background-color: #0b1329;
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 101;
+  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3);
+  padding: 24px 0;
 }
 
-.nav-text a:hover{
-    background-color: #1a83ff;
+.admin-nav-menu.active {
+  left: 0;
 }
 
-.nav-menu-items{
-    width: 100%;
+.admin-nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 16px;
+  list-style: none;
+  height: 56px;
+  margin: 4px 0;
 }
 
-.navbar-toggle{
-    background-color: #23a9d2;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
+.admin-nav-text a {
+  text-decoration: none;
+  color: #94a3b8;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 14px;
 }
 
-span{
-    margin-left: 16px;
+.admin-nav-text a svg {
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
 }
 
-.logout2 {
-    margin-left: auto;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #00c3ea, #0097b2);
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logout2:hover {
-    background: linear-gradient(45deg, #0097b2, #006d80);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .logout2:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
+.admin-nav-text a:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #38bdf8;
+}
+
+.admin-nav-text a:hover svg {
+  transform: translateX(4px);
+}
+
+.admin-nav-text.active a {
+  background-color: var(--primary);
+  color: white;
+}
+
+.admin-nav-menu-items {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-navbar-toggle {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 24px;
+  margin-bottom: 24px;
+}
+
+.admin-navbar-toggle .admin-menu-bars {
+  color: #94a3b8;
+}
+
+.admin-navbar-toggle .admin-menu-bars:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.admin-nav-menu span {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Scoped Logout Button */
+.admin-logout2 {
+  margin-left: auto;
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.admin-logout2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.35);
+  filter: brightness(1.1);
+}
+
+.admin-logout2:active {
+  transform: translateY(0);
+}
+
+/* ===== SCOPED SESSION TIMEOUT WARNING MODAL ===== */
+
+.admin-modal-overlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(11, 19, 41, 0.65);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeInModal 0.25s ease-out;
+}
+
+.admin-modal-content {
+  background-color: white;
+  padding: 36px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: scaleUpModal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.admin-modal-content h3 {
+  font-family: var(--font-headline);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+}
+
+.admin-modal-content p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 28px 0;
+}
+
+.admin-modal-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.admin-modal-btn {
+  padding: 11px 24px;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.admin-modal-btn-extend {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 35, 111, 0.2);
+}
+
+.admin-modal-btn-extend:hover {
+  background-color: var(--primary-container);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 35, 111, 0.3);
+}
+
+.admin-modal-btn-logout {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.admin-modal-btn-logout:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+}
+
+.admin-modal-btn:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUpModal {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

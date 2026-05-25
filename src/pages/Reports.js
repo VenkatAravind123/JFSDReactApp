@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import config from '../main/config';
+import Cookies from 'js-cookie';
 
 function Reports() {
   const [formData, setFormData] = useState({
@@ -18,11 +19,14 @@ function Reports() {
   };
 
   useEffect(() => {
-    const storedCitizenData = localStorage.getItem('citizen');
-    
-    if (storedCitizenData) {
-      const parsedCitizenData = JSON.parse(storedCitizenData);
-      setCitizenData(parsedCitizenData);
+    try {
+      const token = Cookies.get('citizenToken');
+      if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setCitizenData({ id: payload.id });
+      }
+    } catch (e) {
+      console.error("Failed to parse JWT in Reports", e);
     }
   }, []);
 
@@ -30,7 +34,21 @@ function Reports() {
     e.preventDefault();
     try {
       const citizenId = citizendata.id;
-      const response = await axios.post(`${config.url}/citizen/${citizenId}/issues`, formData);
+      const token = Cookies.get('citizenToken');
+      
+      console.log("Submitting issue for Citizen ID:", citizenId);
+      console.log("Token being sent:", token);
+
+      if (!token) {
+        toast.error('❌ You are not logged in. Please log in again.');
+        return;
+      }
+      
+      const response = await axios.post(`${config.url}/citizen/${citizenId}/issues`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       
       if (response.status === 200) {
         toast.success('🎉 Issue Created Successfully!', {
