@@ -1,6 +1,6 @@
 const config = 
 {
-     "url":"http://localhost:2021"
+    "url": "https://janaseva-deployment-latest.onrender.com"
     //"url":"https://janasevasdp25.up.railway.app"
 }
 
