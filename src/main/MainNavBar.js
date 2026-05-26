@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../images/jana.png'
 import Home from './Home';
 import '../styles/Header.css'
@@ -23,6 +23,10 @@ export default function MainNavBar({ onAdminLogin, onCitizenLogin, onPoliticianL
     // ...chart data
   });
   const location = useLocation();
+  const navigate = useNavigate();
+  const onLogin = ()=>{
+    navigate("/citizen")
+  }
 
   const isActive = (path) => location.pathname === path;
 
@@ -42,7 +46,7 @@ export default function MainNavBar({ onAdminLogin, onCitizenLogin, onPoliticianL
             <li><Link to="/contactus" className={`nav-link ${isActive('/contactus') ? 'active' : ''}`}>CONTACT US</Link></li>
           </ul>
           <div className="nav-actions">
-            <button className="btn-login">Login</button>
+            <button className="btn-login" onClick={onLogin}>Login</button>
             <button className="mobile-menu-btn">
               <span className="material-symbols-outlined">menu</span>
             </button>

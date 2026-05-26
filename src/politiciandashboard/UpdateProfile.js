@@ -13,6 +13,19 @@ export default function UpdateProfile() {
     contactnumber: '',
     constituency: '', // Assuming politicians have a constituency field
   });
+
+  const constituencies = [
+    { id: 1, name: 'Visakhapatnam' },
+    { id: 2, name: 'Vijayawada' },
+    { id: 3, name: 'Guntur' },
+    { id: 4, name: 'Nellore' },
+    { id: 5, name: 'Kurnool' },
+    { id: 6, name: 'Rajahmundry' },
+    { id: 7, name: 'Tirupati' },
+    { id: 8, name: 'Kadapa' },
+    { id: 9, name: 'Ananthapuram' },
+    { id: 10, name: 'Kakinada' }
+  ];
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -144,14 +157,27 @@ export default function UpdateProfile() {
 
         <div className="form-group form-group-full">
           <label>Voting Constituency</label>
-          <input 
+          {/* <input 
             type="text" 
             name="constituency" 
             value={politiciandata.constituency || ''} 
             onChange={handleChange} 
             placeholder="Enter your voting constituency"
             required 
-          />
+          /> */}
+          <select
+            name="constituency"
+            value={politiciandata.constituency}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Constituency</option>
+            {constituencies.map((constituency) => (
+              <option key={constituency.id} value={constituency.name}>
+                {constituency.name}
+              </option>
+            ))}
+          </select>  
         </div>
 
         <button type="submit" className="politician-submit-button">Update Profile</button>

@@ -15,9 +15,22 @@ export default function UpdateCitizenProfile() {
     contactnumber: '',
     constituency: '', // Assuming citizens have a constituency field
   });
+  const [selectedConstituency, setSelectedConstituency] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  const constituencies = [
+    { id: 1, name: 'Visakhapatnam' },
+    { id: 2, name: 'Vijayawada' },
+    { id: 3, name: 'Guntur' },
+    { id: 4, name: 'Nellore' },
+    { id: 5, name: 'Kurnool' },
+    { id: 6, name: 'Rajahmundry' },
+    { id: 7, name: 'Tirupati' },
+    { id: 8, name: 'Kadapa' },
+    { id: 9, name: 'Ananthapuram' },
+    { id: 10, name: 'Kakinada' }
+  ];
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -138,7 +151,7 @@ export default function UpdateCitizenProfile() {
         </div>
 
         <div className="form-group">
-          <label>Contact Number</label>
+          <label>Contact Num ber</label>
           <input 
             type="text" 
             name="contactnumber" 
@@ -151,16 +164,29 @@ export default function UpdateCitizenProfile() {
 
         <div className="form-group form-group-full">
           <label>Constituency</label>
-          <input 
+          {/* <input 
             type="text" 
-            name="constituency" 
+            name="constituency"                                                                  
             value={formData.constituency} 
             onChange={handleChange} 
             placeholder="Enter your voting constituency"
             required 
-          />
-        </div>
-
+          /> */}
+         <select
+            name="constituency"
+            value={formData.constituency}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Constituency</option>
+            {constituencies.map((constituency) => (
+              <option key={constituency.id} value={constituency.name}>
+                {constituency.name}
+              </option>
+            ))}
+          </select>                                                                                                     
+        </div>                                                                                                                  
+                                                         
         <button type="submit" className="submit-button">Update Profile</button>
       </form>
     </div>

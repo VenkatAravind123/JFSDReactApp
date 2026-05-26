@@ -2,11 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import config from '../main/config';
-
+import Cookies from 'js-cookie';
 export default function ViewIssuePolitician()
 {
     const [issue , setIssues] = useState(null);
-
+const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
     const {id} = useParams();
 
     useEffect(() => {
@@ -16,7 +17,13 @@ export default function ViewIssuePolitician()
              { 
                 try 
                 {
-                  const response = await axios.get(`${config.url}/politician/displayissuebyid?id=${id}`);
+                  setLoading(true);
+                  const token = Cookies.get('politiciantoken')
+                  const response = await axios.get(`${config.url}/politician/displayissuebyid?id=${id}`,{
+                    headers:{
+                      'Authorization' : `Bearer ${token}`
+                    }
+                  });
                   setIssues(response.data);
                 //console.log(response.data)
                 } 
